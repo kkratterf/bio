@@ -8,7 +8,13 @@ export type CardSize = "1x1" | "2x1" | "1x2" | "2x2";
 
 type BaseCard = {
   id: string;
+  /** Size on the 4-column desktop grid. */
   size: CardSize;
+  /**
+   * Avely keeps a separate 2-column layout for small screens: a card can take
+   * another shape there and appear in another position.
+   */
+  mobile?: { size?: CardSize; order?: number };
   href: string;
   /** Accessible name for the whole card link. */
   label: string;
@@ -29,7 +35,7 @@ export type WebsiteCard = BaseCard & {
   kind: "website";
   title: string;
   domain: string;
-  icon?: { src: string; width: number; height: number };
+  icon?: { src: string; width: number; height: number } | "github";
   preview?: { src: string; width: number; height: number; alt: string };
 };
 
@@ -57,8 +63,8 @@ export const profile = {
   },
   avatar: {
     src: "/images/avatar.jpg",
-    width: 512,
-    height: 512,
+    width: 600,
+    height: 600,
     alt: "Federico Kratter Thaler",
   },
   locale: "en_US",
@@ -73,61 +79,66 @@ export const sections: Section[] = [
         kind: "map",
         id: "location",
         size: "1x2",
+        mobile: { size: "2x1", order: 2 },
         place: "Milan, Italy",
         href: "https://www.google.com/maps/search/?api=1&query=45.46426590913465%2C9.18814879103845",
         label: "Milan, Italy on Google Maps",
-        image: { src: "/images/map-milan.png", width: 374, height: 796 },
+        image: { src: "/images/map-milan.png", width: 370, height: 792 },
       },
       {
         kind: "media",
         id: "linkedin",
         size: "2x1",
+        mobile: { order: 1 },
         href: "https://www.linkedin.com/in/kkratter/",
         label: "Federico Kratter Thaler on LinkedIn",
         image: {
-          src: "/images/linkedin.jpg",
-          width: 1200,
-          height: 538,
-          alt: "LinkedIn profile of Federico Kratter Thaler",
+          src: "/images/linkedin.png",
+          width: 1170,
+          height: 525,
+          alt: "LinkedIn, @kkratter",
         },
       },
       {
         kind: "media",
         id: "x",
         size: "1x1",
+        mobile: { order: 4 },
         href: "https://x.com/kkratter",
-        label: "Federico Kratter Thaler on X",
+        label: "Federico Kratter Thaler on X (Twitter)",
         image: {
-          src: "/images/x.jpg",
-          width: 600,
-          height: 600,
-          alt: "X profile of @kkratter",
+          src: "/images/twitter.png",
+          width: 525,
+          height: 525,
+          alt: "Twitter, @kkratter",
         },
       },
       {
         kind: "media",
         id: "github",
         size: "1x1",
+        mobile: { order: 5 },
         href: "https://github.com/kkratterf",
         label: "Federico Kratter Thaler on GitHub",
         image: {
-          src: "/images/github.jpg",
-          width: 600,
-          height: 600,
-          alt: "GitHub profile of kkratterf",
+          src: "/images/github.png",
+          width: 525,
+          height: 525,
+          alt: "GitHub, @kkratterf",
         },
       },
       {
         kind: "media",
         id: "website",
         size: "2x1",
+        mobile: { order: 3 },
         href: "https://www.kkratter.com/",
-        label: "kkratter.com, personal website",
+        label: "Portfolio 2023, kkratter.com",
         image: {
-          src: "/images/kkratter-com.jpg",
-          width: 1200,
-          height: 538,
-          alt: "Preview of kkratter.com",
+          src: "/images/portfolio.png",
+          width: 1170,
+          height: 525,
+          alt: "Portfolio 2023, Product & Design System Designer",
         },
       },
     ],
@@ -144,21 +155,22 @@ export const sections: Section[] = [
         label: "play2match",
         title: "play2match",
         domain: "play2match.it",
-        icon: { src: "/images/icons/play2match.png", width: 64, height: 64 },
+        icon: { src: "/images/icons/play2match.png", width: 48, height: 48 },
       },
       {
         kind: "website",
         id: "substack",
         size: "2x2",
+        mobile: { size: "2x1" },
         href: "https://kkratter.substack.com/",
         label: "Building. Always. on Substack",
         title: "Building. Always.",
         domain: "kkratter.substack.com",
-        icon: { src: "/images/icons/substack.png", width: 64, height: 64 },
+        icon: { src: "/images/icons/substack.jpg", width: 64, height: 64 },
         preview: {
           src: "/images/substack.jpg",
-          width: 1200,
-          height: 600,
+          width: 920,
+          height: 480,
           alt: "Building. Always. newsletter cover",
         },
       },
@@ -176,7 +188,7 @@ export const sections: Section[] = [
         label: "C14, open-source startup database",
         title: "C14 — Open-source startup database",
         domain: "c14.so",
-        icon: { src: "/images/icons/c14.png", width: 64, height: 64 },
+        icon: { src: "/images/icons/c14.png", width: 48, height: 48 },
       },
       {
         kind: "website",
@@ -186,16 +198,18 @@ export const sections: Section[] = [
         label: "M63 Club",
         title: "M63 Club — Keep the secret",
         domain: "m63.club",
-        icon: { src: "/images/icons/m63.png", width: 64, height: 64 },
+        icon: { src: "/images/icons/m63.png", width: 48, height: 48 },
       },
       {
         kind: "website",
         id: "fratmscript",
         size: "2x2",
+        mobile: { size: "2x1" },
         href: "https://kkratterf.github.io/fratmscript/",
         label: "FratmScript",
         title: "FratmScript - JavaScript ma comme si deve 🤌",
         domain: "kkratterf.github.io",
+        icon: "github",
       },
     ],
   },
