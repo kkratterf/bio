@@ -1,0 +1,61 @@
+import Image from "next/image";
+import { BentoCard } from "@/components/bento-card";
+import { JsonLd } from "@/components/json-ld";
+import { profile, sections } from "@/lib/profile";
+
+export default function Home() {
+  return (
+    <>
+      <JsonLd />
+      <main className="relative mx-auto flex min-h-screen w-full max-w-[1728px] flex-col items-center pb-16 xl:flex-row xl:items-start xl:p-16">
+        <header className="w-full max-w-[428px] animate-profile-in px-10 pt-12 xl:sticky xl:top-16 xl:mr-20 xl:max-w-none xl:min-w-0 xl:flex-1 xl:px-0 xl:pt-0">
+          <div className="relative size-30 shrink-0 xl:size-46">
+            <Image
+              src={profile.avatar.src}
+              alt={profile.avatar.alt}
+              width={profile.avatar.width}
+              height={profile.avatar.height}
+              sizes="(min-width: 1280px) 184px, 120px"
+              priority
+              className="size-full rounded-full object-cover shadow-sm ring-1 ring-black/5"
+              draggable={false}
+            />
+          </div>
+          <div className="mt-8 ml-2 w-[calc(100%-8px)] max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
+            <h1 className="text-[32px] leading-[120%] font-bold tracking-[-1px] wrap-break-word whitespace-pre-wrap text-fg xl:text-[44px] xl:tracking-[-2px]">
+              {profile.name}
+            </h1>
+            <p className="mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
+              {profile.bio}
+            </p>
+          </div>
+        </header>
+
+        <div className="mt-10 flex w-full max-w-[428px] flex-col gap-6 px-6 xl:mt-0 xl:w-[820px] xl:max-w-none xl:flex-none xl:px-0">
+          {sections.map((section) => (
+            <section
+              key={section.id}
+              className="bento-section"
+              aria-labelledby={`${section.id}-title`}
+            >
+              <h2
+                id={`${section.id}-title`}
+                className="flex h-[46px] items-center px-3 text-lg leading-tight font-semibold text-fg"
+              >
+                {section.title}
+              </h2>
+              <ul role="list" className="bento mt-6">
+                {section.cards.map((card) => (
+                  <BentoCard key={card.id} card={card} />
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </main>
+      <footer className="mb-10 flex w-full justify-center text-xs text-muted-fg/80">
+        <p>© {profile.name}</p>
+      </footer>
+    </>
+  );
+}
