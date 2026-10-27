@@ -32,7 +32,7 @@
   --color-border: var(--border);
   --color-ring: var(--ring);
   --font-sans:
-    var(--font-cal-sans), ui-sans-serif, system-ui, sans-serif,
+    var(--font-inter), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
   --radius-card: var(--radius-card);

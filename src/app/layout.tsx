@@ -1,15 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 import { profile } from "@/lib/profile";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
-// Cal Sans, the typeface of coss.com (SIL OFL 1.1, licence in src/fonts/OFL.txt):
-// a variable font with weights 400 to 700.
-const calSans = localFont({
-  variable: "--font-cal-sans",
-  src: "../fonts/CalSansVF.woff2",
-  weight: "400 700",
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  axes: ["opsz"],
   display: "swap",
 });
 
@@ -90,7 +88,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${calSans.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} antialiased`}>
       <body className="min-h-screen font-sans">{children}</body>
     </html>
   );

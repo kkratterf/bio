@@ -7,13 +7,12 @@ export const alt = `${profile.name} — ${profile.bio}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const fontDir = join(process.cwd(), "src/fonts");
+const fontDir = join(process.cwd(), "node_modules/@fontsource/inter/files");
 
 export default async function OpengraphImage() {
-  // Static cuts of Cal Sans: the image renderer can't read variable fonts.
   const [regular, semibold, avatar] = await Promise.all([
-    readFile(join(fontDir, "CalSans-400.woff")),
-    readFile(join(fontDir, "CalSans-600.woff")),
+    readFile(join(fontDir, "inter-latin-400-normal.woff")),
+    readFile(join(fontDir, "inter-latin-600-normal.woff")),
     readFile(join(process.cwd(), "public", profile.avatar.src), "base64"),
   ]);
 
@@ -28,7 +27,7 @@ export default async function OpengraphImage() {
           justifyContent: "center",
           padding: "0 96px",
           background: "#fafafa",
-          fontFamily: "Cal Sans",
+          fontFamily: "Inter",
         }}
       >
         <img
@@ -43,7 +42,7 @@ export default async function OpengraphImage() {
             marginTop: 48,
             fontSize: 80,
             fontWeight: 600,
-            letterSpacing: -1.6,
+            letterSpacing: -2.4,
             lineHeight: 1.2,
             color: "#262626",
           }}
@@ -58,8 +57,8 @@ export default async function OpengraphImage() {
     {
       ...size,
       fonts: [
-        { name: "Cal Sans", data: regular, weight: 400, style: "normal" },
-        { name: "Cal Sans", data: semibold, weight: 600, style: "normal" },
+        { name: "Inter", data: regular, weight: 400, style: "normal" },
+        { name: "Inter", data: semibold, weight: 600, style: "normal" },
       ],
     },
   );

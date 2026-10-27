@@ -7,8 +7,8 @@ Personal bio page of Federico Kratter Thaler, a Next.js rebuild of
 
 - Next.js 16 (App Router, static prerender) + React 19
 - Tailwind CSS v4
-- Cal Sans, the coss.com typeface (SIL OFL), via `next/font/local`; colours
-  from the coss ui light theme
+- Inter via `next/font` (self-hosted, no layout shift); colours from the
+  coss.com (coss ui) light theme
 - `next/image` for every picture (AVIF/WebP, responsive `sizes`)
 
 ## Content
