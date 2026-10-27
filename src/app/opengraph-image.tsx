@@ -7,12 +7,13 @@ export const alt = `${profile.name} — ${profile.bio}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const fontDir = join(process.cwd(), "node_modules/@fontsource/inter/files");
+const fontDir = join(process.cwd(), "src/fonts");
 
 export default async function OpengraphImage() {
-  const [regular, bold, avatar] = await Promise.all([
-    readFile(join(fontDir, "inter-latin-400-normal.woff")),
-    readFile(join(fontDir, "inter-latin-600-normal.woff")),
+  // Static cuts of Cal Sans: the image renderer can't read variable fonts.
+  const [regular, semibold, avatar] = await Promise.all([
+    readFile(join(fontDir, "CalSans-400.woff")),
+    readFile(join(fontDir, "CalSans-600.woff")),
     readFile(join(process.cwd(), "public", profile.avatar.src), "base64"),
   ]);
 
@@ -27,7 +28,7 @@ export default async function OpengraphImage() {
           justifyContent: "center",
           padding: "0 96px",
           background: "#fafafa",
-          fontFamily: "Inter",
+          fontFamily: "Cal Sans",
         }}
       >
         <img
@@ -42,14 +43,14 @@ export default async function OpengraphImage() {
             marginTop: 48,
             fontSize: 80,
             fontWeight: 600,
-            letterSpacing: -3.5,
+            letterSpacing: -1.6,
             lineHeight: 1.2,
             color: "#262626",
           }}
         >
           {profile.name}
         </div>
-        <div style={{ marginTop: 16, fontSize: 40, color: "#5f5f5f" }}>
+        <div style={{ marginTop: 16, fontSize: 40, color: "#686868" }}>
           {profile.bio}
         </div>
       </div>
@@ -57,8 +58,8 @@ export default async function OpengraphImage() {
     {
       ...size,
       fonts: [
-        { name: "Inter", data: regular, weight: 400, style: "normal" },
-        { name: "Inter", data: bold, weight: 600, style: "normal" },
+        { name: "Cal Sans", data: regular, weight: 400, style: "normal" },
+        { name: "Cal Sans", data: semibold, weight: 600, style: "normal" },
       ],
     },
   );

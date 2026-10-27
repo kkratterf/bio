@@ -1,53 +1,117 @@
 @import "tailwindcss";
 
 /*
- * Tokens after coss.com (coss ui's light theme): an off-white page, white
- * cells ruled by hairlines, neutral-800 text and a darkened neutral-500 for
- * secondary text (5.5:1 on white).
+ * coss.com's light theme (coss ui tokens): an off-white page, white cards with
+ * a hairline border, neutral-800 text and a darkened neutral-500 for secondary
+ * text (5.5:1 on white).
  */
 :root {
-  --page: #fafafa;
-  --background: #ffffff;
-  --foreground: #262626;
-  --muted-foreground: #686868;
-  --border: #e5e5e5;
+  --bg: #fafafa;
+  --content: #ffffff;
+  --fg: #262626;
+  --muted: rgb(0 0 0 / 0.04);
+  --muted-fg: #686868;
+  --border: rgb(0 0 0 / 0.08);
   --ring: #a3a3a3;
+  --radius-card: 1.125rem;
+  --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --label-bg: rgb(255 255 255 / 0.7);
+  --pill-border: rgb(212 212 216 / 0.6);
+  --marker: #3d81ff;
+  --marker-pulse: #679bff;
 
   color-scheme: light;
 }
 
 @theme inline {
-  --color-page: var(--page);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-bg: var(--bg);
+  --color-content: var(--content);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-muted-fg: var(--muted-fg);
   --color-border: var(--border);
   --color-ring: var(--ring);
   --font-sans:
-    var(--font-inter), ui-sans-serif, system-ui, sans-serif,
+    var(--font-cal-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --radius-card: var(--radius-card);
+  --shadow-card: var(--card-shadow);
+
+  --animate-profile-in: profile-in 240ms ease-out 60ms backwards;
+  --animate-marker-pulse: marker-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-reveal: reveal 300ms ease-out both;
+
+  @keyframes profile-in {
+    from {
+      opacity: 0;
+      transform: translateY(-1.25rem);
+    }
+  }
+
+  @keyframes marker-pulse {
+    0% {
+      opacity: 0.4;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(4);
+    }
+  }
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+    }
+  }
 }
 
 html {
-  background: var(--page);
+  background: var(--bg);
 }
 
 body {
-  background: var(--page);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--fg);
 }
 
-/* coss.com's drafting grid: a dot every 1.5rem behind drawings and icons. */
-.drafting-grid {
-  background-image: radial-gradient(
-    circle at center,
-    color-mix(in srgb, var(--foreground) 16%, transparent) 1px,
-    transparent 1.2px
-  );
-  background-size: 1.5rem 1.5rem;
-  background-position: center;
+/*
+ * Square grid cells: one row is as tall as one column is wide. The section
+ * around the grid is the size container, since an element can't query itself.
+ */
+.bento-section {
+  container-type: inline-size;
+}
+
+.bento {
+  --cols: 2;
+  --gap: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-auto-rows: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  grid-auto-flow: row dense;
+  gap: var(--gap);
+}
+
+@media (min-width: 80rem) {
+  .bento {
+    --cols: 4;
+    --gap: 1.5rem;
+  }
+}
+
+/* Avely enlarges link hit areas to at least 44px. */
+.touch-target::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  min-width: 44px;
+  height: 100%;
+  min-height: 44px;
+  transform: translate(-50%, -50%);
 }
 
 @media (prefers-reduced-motion: reduce) {
