@@ -139,9 +139,12 @@ function GithubMark() {
 }
 
 function Website({ card }: { card: WebsiteCard }) {
+  const tall = card.size === "2x2";
   return (
     <div className={`${cardSurface} flex flex-col justify-between p-4`}>
-      <div className="relative z-10 flex min-w-0 flex-col">
+      <div
+        className={`relative z-10 flex min-w-0 flex-col ${card.preview && !tall ? "max-w-[50%] xl:max-w-[calc(100%-330px)]" : ""}`}
+      >
         <div className="flex size-10 items-center justify-center overflow-hidden rounded-xl bg-content">
           {card.icon === "github" ? (
             <GithubMark />
@@ -166,29 +169,28 @@ function Website({ card }: { card: WebsiteCard }) {
         </div>
       </div>
       {card.preview &&
-        (card.size === "2x2" ? (
-          // On the short mobile tile the preview sits on the right half.
-          <div className="absolute inset-y-4 right-4 z-10 w-[45%] overflow-hidden rounded-xl bg-muted xl:relative xl:inset-auto xl:mt-4 xl:w-full">
+        (tall ? (
+          // Square tiles show the whole preview under the title.
+          <div className="relative z-10 mt-4 aspect-[1200/630] w-full overflow-hidden rounded-xl border border-border bg-muted">
             <Image
               src={card.preview.src}
               alt={card.preview.alt}
-              width={card.preview.width}
-              height={card.preview.height}
-              sizes="(min-width: 1280px) 366px, 160px"
-              className="size-full animate-reveal object-cover object-left xl:h-auto"
+              fill
+              sizes="(min-width: 1280px) 366px, 350px"
+              className="animate-reveal object-cover"
               draggable={false}
             />
           </div>
         ) : (
-          // Short tiles keep the preview on the right at every size.
-          <div className="absolute inset-y-4 right-4 z-10 w-[45%] overflow-hidden rounded-xl bg-muted xl:w-1/2">
+          // Short tiles keep the preview on the right, at its own proportions
+          // once the tile is wide enough.
+          <div className="absolute inset-y-4 right-4 z-10 w-[45%] overflow-hidden rounded-xl border border-border bg-muted xl:aspect-[1200/630] xl:w-auto">
             <Image
               src={card.preview.src}
               alt={card.preview.alt}
-              width={card.preview.width}
-              height={card.preview.height}
-              sizes="(min-width: 1280px) 400px, 160px"
-              className="size-full animate-reveal object-cover object-left"
+              fill
+              sizes="(min-width: 1280px) 300px, 160px"
+              className="animate-reveal object-cover"
               draggable={false}
             />
           </div>
