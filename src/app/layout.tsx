@@ -7,11 +7,9 @@ import "./globals.css";
 // PP Radio Grotesk, the typeface of the 2023 portfolio (kkratterf/portfolio23).
 const radioGrotesk = localFont({
   variable: "--font-radio-grotesk",
-  src: [
-    { path: "../fonts/PPRadioGrotesk-200.woff2", weight: "200", style: "normal" },
-    { path: "../fonts/PPRadioGrotesk-400.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/PPRadioGrotesk-900.woff2", weight: "900", style: "normal" },
-  ],
+  // Only the Regular cut: every text style uses it, so nothing is synthesised.
+  src: "../fonts/PPRadioGrotesk-400.woff2",
+  weight: "400",
   display: "swap",
 });
 
@@ -86,7 +84,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#ffffff",
+  themeColor: "#fafafa",
   colorScheme: "light",
 };
 

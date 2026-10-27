@@ -121,7 +121,7 @@ function MapTile({ card }: { card: MapCard }) {
         className="pointer-events-none absolute top-1/2 left-1/2 z-10 size-12 animate-marker-pulse rounded-full bg-(--marker-pulse)"
       />
       <div className="relative z-20 mt-auto p-4 xl:sr-only">
-        <p className="w-fit rounded-[10px] border border-(--pill-border) bg-(--label-bg) px-2.5 py-1.5 text-[13px] font-medium text-fg shadow-sm backdrop-blur-[20px]">
+        <p className="w-fit rounded-[10px] border border-(--pill-border) bg-(--label-bg) px-2.5 py-1.5 text-[13px] font-normal text-fg shadow-sm backdrop-blur-[20px]">
           <span className="line-clamp-1">{card.place}</span>
         </p>
       </div>

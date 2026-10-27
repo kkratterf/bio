@@ -22,7 +22,7 @@ export default function Home() {
             />
           </div>
           <div className="mt-8 ml-2 w-[calc(100%-8px)] max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
-            <h1 className="text-[32px] leading-[120%] font-black tracking-[-0.5px] wrap-break-word whitespace-pre-wrap text-fg xl:text-[44px] xl:tracking-[-1px]">
+            <h1 className="text-[32px] leading-[110%] font-normal tracking-[-1px] wrap-break-word whitespace-pre-wrap text-fg xl:text-[44px] xl:tracking-[-1.5px]">
               {profile.name}
             </h1>
             <p className="mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
@@ -31,7 +31,7 @@ export default function Home() {
           </div>
         </header>
 
-        <div className="mt-10 flex w-full max-w-[428px] flex-col gap-6 px-6 xl:mt-0 xl:w-[820px] xl:max-w-none xl:flex-none xl:px-0">
+        <div className="mt-10 flex w-full max-w-[428px] flex-col gap-10 px-6 xl:mt-0 xl:gap-12 xl:w-[820px] xl:max-w-none xl:flex-none xl:px-0">
           {sections.map((section) => (
             <section
               key={section.id}
@@ -40,17 +40,17 @@ export default function Home() {
             >
               <h2
                 id={`${section.id}-title`}
-                className="flex h-[46px] items-center px-3 text-lg leading-tight font-semibold text-fg"
+                className="px-1 text-base leading-6 font-normal text-fg"
               >
                 {section.title}
               </h2>
-              <ul role="list" className="bento mt-6">
+              <ul role="list" className="bento mt-3">
                 {section.cards.map((card) => (
                   <BentoCard key={card.id} card={card} />
                 ))}
               </ul>
               {section.posts && section.posts.length > 0 && (
-                <ol role="list" className="mt-6 flex flex-col">
+                <ol role="list" className="mt-3 flex flex-col">
                   {section.posts.map((post) => (
                     <li key={post.href}>
                       <a
@@ -76,7 +76,7 @@ export default function Home() {
           ))}
         </div>
       </main>
-      <footer className="mb-10 flex w-full justify-center text-xs text-muted-fg/80">
+      <footer className="mb-10 flex w-full justify-center text-xs text-muted-fg">
         <p>© {profile.name}</p>
       </footer>
     </>

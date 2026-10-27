@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
-/* Palette taken from the light Avely theme the profile uses. */
+/*
+ * Neutral palette after coss.com: an off-white page with white cards, near
+ * black text and a darker grey for secondary text, so both pass WCAG AA.
+ */
 :root {
-  --bg: oklch(1 0 0);
-  --content: oklch(1 0 0);
-  --fg: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-fg: oklch(0.552 0.016 285.938);
-  --border: oklch(0.911 0.006 286.286);
-  --ring: #09b15e;
-  --radius-card: 1.5rem;
-  --card-shadow:
-    0 2px 4px 0 rgb(0 0 0 / 0.08), 0 1px 1px -1px rgb(0 0 0 / 0.07);
+  --bg: #fafafa;
+  --content: #ffffff;
+  --fg: #171717;
+  --muted: #f5f5f5;
+  --muted-fg: #525252;
+  --border: rgb(0 0 0 / 0.08);
+  --ring: #a3a3a3;
+  --radius-card: 1.25rem;
+  --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --label-bg: rgb(255 255 255 / 0.7);
   --pill-border: rgb(212 212 216 / 0.6);
   --marker: #3d81ff;

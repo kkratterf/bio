@@ -10,9 +10,8 @@ export const contentType = "image/png";
 const fontDir = join(process.cwd(), "src/fonts");
 
 export default async function OpengraphImage() {
-  const [regular, bold, avatar] = await Promise.all([
+  const [regular, avatar] = await Promise.all([
     readFile(join(fontDir, "PPRadioGrotesk-400.woff")),
-    readFile(join(fontDir, "PPRadioGrotesk-900.woff")),
     readFile(join(process.cwd(), "public", profile.avatar.src), "base64"),
   ]);
 
@@ -26,7 +25,7 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "0 96px",
-          background: "#ffffff",
+          background: "#fafafa",
           fontFamily: "PP Radio Grotesk",
         }}
       >
@@ -41,15 +40,15 @@ export default async function OpengraphImage() {
           style={{
             marginTop: 48,
             fontSize: 80,
-            fontWeight: 900,
+            fontWeight: 400,
             letterSpacing: -3,
             lineHeight: 1.2,
-            color: "#18181b",
+            color: "#171717",
           }}
         >
           {profile.name}
         </div>
-        <div style={{ marginTop: 16, fontSize: 40, color: "#71717a" }}>
+        <div style={{ marginTop: 16, fontSize: 40, color: "#525252" }}>
           {profile.bio}
         </div>
       </div>
@@ -58,7 +57,6 @@ export default async function OpengraphImage() {
       ...size,
       fonts: [
         { name: "PP Radio Grotesk", data: regular, weight: 400, style: "normal" },
-        { name: "PP Radio Grotesk", data: bold, weight: 900, style: "normal" },
       ],
     },
   );
