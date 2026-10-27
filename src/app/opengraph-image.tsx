@@ -7,11 +7,12 @@ export const alt = `${profile.name} — ${profile.bio}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const fontDir = join(process.cwd(), "src/fonts");
+const fontDir = join(process.cwd(), "node_modules/@fontsource/inter/files");
 
 export default async function OpengraphImage() {
-  const [regular, avatar] = await Promise.all([
-    readFile(join(fontDir, "PPRadioGrotesk-400.woff")),
+  const [regular, bold, avatar] = await Promise.all([
+    readFile(join(fontDir, "inter-latin-400-normal.woff")),
+    readFile(join(fontDir, "inter-latin-600-normal.woff")),
     readFile(join(process.cwd(), "public", profile.avatar.src), "base64"),
   ]);
 
@@ -26,7 +27,7 @@ export default async function OpengraphImage() {
           justifyContent: "center",
           padding: "0 96px",
           background: "#fafafa",
-          fontFamily: "PP Radio Grotesk",
+          fontFamily: "Inter",
         }}
       >
         <img
@@ -40,15 +41,15 @@ export default async function OpengraphImage() {
           style={{
             marginTop: 48,
             fontSize: 80,
-            fontWeight: 400,
-            letterSpacing: -3,
+            fontWeight: 600,
+            letterSpacing: -3.5,
             lineHeight: 1.2,
-            color: "#171717",
+            color: "#262626",
           }}
         >
           {profile.name}
         </div>
-        <div style={{ marginTop: 16, fontSize: 40, color: "#525252" }}>
+        <div style={{ marginTop: 16, fontSize: 40, color: "#5f5f5f" }}>
           {profile.bio}
         </div>
       </div>
@@ -56,7 +57,8 @@ export default async function OpengraphImage() {
     {
       ...size,
       fonts: [
-        { name: "PP Radio Grotesk", data: regular, weight: 400, style: "normal" },
+        { name: "Inter", data: regular, weight: 400, style: "normal" },
+        { name: "Inter", data: bold, weight: 600, style: "normal" },
       ],
     },
   );

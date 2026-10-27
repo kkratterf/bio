@@ -1,15 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
+import { Geist_Mono, Inter } from "next/font/google";
 import { profile } from "@/lib/profile";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
-// PP Radio Grotesk, the typeface of the 2023 portfolio (kkratterf/portfolio23).
-const radioGrotesk = localFont({
-  variable: "--font-radio-grotesk",
-  // Only the Regular cut: every text style uses it, so nothing is synthesised.
-  src: "../fonts/PPRadioGrotesk-400.woff2",
-  weight: "400",
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  axes: ["opsz"],
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -90,7 +94,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${radioGrotesk.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} ${geistMono.variable} antialiased`}>
       <body className="min-h-screen font-sans">{children}</body>
     </html>
   );

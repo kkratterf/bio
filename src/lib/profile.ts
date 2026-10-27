@@ -1,45 +1,23 @@
 /**
  * Every piece of content shown on the page lives here, so the bio can be
- * edited without touching layout code. Grid sizes mirror the Avely bento grid:
- * one unit is one column of the 4-column desktop grid.
+ * edited without touching layout code.
  */
 
-export type CardSize = "1x1" | "2x1" | "1x2" | "2x2" | "4x1";
-
-type BaseCard = {
-  id: string;
-  /** Size on the 4-column desktop grid. */
-  size: CardSize;
-  /**
-   * Avely keeps a separate 2-column layout for small screens: a card can take
-   * another shape there and appear in another position.
-   */
-  mobile?: { size?: CardSize; order?: number };
-  href: string;
-  /** Accessible name for the whole card link. */
+export type Link = {
   label: string;
+  /** Handle or short form shown next to the label. */
+  detail: string;
+  href: string;
 };
 
-export type MediaCard = BaseCard & {
-  kind: "media";
-  image: { src: string; width: number; height: number; alt: string };
-};
-
-export type MapCard = BaseCard & {
-  kind: "map";
-  place: string;
-  image: { src: string; width: number; height: number };
-};
-
-export type WebsiteCard = BaseCard & {
-  kind: "website";
-  title: string;
+export type Project = {
+  id: string;
+  name: string;
+  href: string;
   domain: string;
-  icon?: { src: string; width: number; height: number } | "github";
-  preview?: { src: string; width: number; height: number; alt: string };
+  summary: string;
+  icon: { src: string; width: number; height: number } | "github";
 };
-
-export type Card = MediaCard | MapCard | WebsiteCard;
 
 export type Post = {
   title: string;
@@ -48,11 +26,11 @@ export type Post = {
   href: string;
 };
 
-export type Section = {
+export type ProjectSection = {
   id: string;
   title: string;
-  cards: Card[];
-  posts?: Post[];
+  intro: string;
+  projects: Project[];
 };
 
 export const profile = {
@@ -78,91 +56,25 @@ export const profile = {
   locale: "en_US",
 } as const;
 
-export const sections: Section[] = [
-  {
-    id: "about",
-    title: "About",
-    cards: [
-      {
-        kind: "map",
-        id: "location",
-        size: "1x2",
-        mobile: { size: "2x1", order: 2 },
-        place: "Milan, Italy",
-        href: "https://www.google.com/maps/search/?api=1&query=45.46426590913465%2C9.18814879103845",
-        label: "Milan, Italy on Google Maps",
-        image: { src: "/images/map-milan.png", width: 370, height: 792 },
-      },
-      {
-        kind: "media",
-        id: "linkedin",
-        size: "2x1",
-        mobile: { order: 1 },
-        href: "https://www.linkedin.com/in/kkratter/",
-        label: "Federico Kratter Thaler on LinkedIn",
-        image: {
-          src: "/images/linkedin.png",
-          width: 1170,
-          height: 525,
-          alt: "LinkedIn, @kkratter",
-        },
-      },
-      {
-        kind: "media",
-        id: "x",
-        size: "1x1",
-        mobile: { order: 4 },
-        href: "https://x.com/kkratter",
-        label: "Federico Kratter Thaler on X (Twitter)",
-        image: {
-          src: "/images/twitter.png",
-          width: 525,
-          height: 525,
-          alt: "Twitter, @kkratter",
-        },
-      },
-      {
-        kind: "media",
-        id: "github",
-        size: "1x1",
-        mobile: { order: 5 },
-        href: "https://github.com/kkratterf",
-        label: "Federico Kratter Thaler on GitHub",
-        image: {
-          src: "/images/github.png",
-          width: 525,
-          height: 525,
-          alt: "GitHub, @kkratterf",
-        },
-      },
-      {
-        kind: "media",
-        id: "website",
-        size: "2x1",
-        mobile: { order: 3 },
-        href: "https://www.kkratter.com/",
-        label: "Portfolio 2023, kkratter.com",
-        image: {
-          src: "/images/portfolio.png",
-          width: 1170,
-          height: 525,
-          alt: "Portfolio 2023, Product & Design System Designer",
-        },
-      },
-    ],
-  },
+export const links: Link[] = [
+  { label: "LinkedIn", detail: "@kkratter", href: "https://www.linkedin.com/in/kkratter/" },
+  { label: "X", detail: "@kkratter", href: "https://x.com/kkratter" },
+  { label: "GitHub", detail: "@kkratterf", href: "https://github.com/kkratterf" },
+  { label: "Portfolio", detail: "kkratter.com", href: "https://www.kkratter.com/" },
+];
+
+export const projectSections: ProjectSection[] = [
   {
     id: "building",
     title: "Building",
-    cards: [
+    intro: "What I work on every day.",
+    projects: [
       {
-        kind: "website",
         id: "play2match",
-        size: "2x1",
+        name: "play2match",
         href: "https://www.play2match.it/",
-        label: "play2match",
-        title: "play2match",
         domain: "play2match.it",
+        summary: "Amateur football matches across Italy: find one near you, book your spot, play.",
         icon: { src: "/images/icons/play2match.png", width: 48, height: 48 },
       },
     ],
@@ -170,82 +82,65 @@ export const sections: Section[] = [
   {
     id: "products",
     title: "Products",
-    cards: [
+    intro: "Things I designed and shipped, mostly open source.",
+    projects: [
       {
-        kind: "website",
         id: "m63",
-        size: "2x1",
+        name: "M63",
         href: "https://m63.it/",
-        label: "M63, the open map of the Italian startup ecosystem",
-        title: "M63 — The open map of Italian startups",
         domain: "m63.it",
+        summary: "The open map of the Italian startup ecosystem, plus a private club where founders meet every week.",
         icon: { src: "/images/icons/m63.png", width: 192, height: 192 },
       },
       {
-        kind: "website",
         id: "fratmscript",
-        size: "2x1",
-        href: "https://kkratterf.github.io/fratmscript/",
-        label: "FratmScript",
-        title: "FratmScript — JavaScript ma comme si deve 🤌",
-        domain: "kkratterf.github.io",
+        name: "FratmScript",
+        href: "https://fratmscript.kkratter.com/",
+        domain: "fratmscript.kkratter.com",
+        summary: "JavaScript ma comme si deve 🤌 A transpiler from Neapolitan to JavaScript, written in Rust.",
         icon: "github",
       },
       {
-        kind: "website",
         id: "maramao",
-        size: "2x1",
+        name: "Maramao",
         href: "https://maramao.kkratter.com/",
-        label: "Maramao, the Pomodoro timer that stops you with cats",
-        title: "Maramao — The Pomodoro timer that stops you with cats",
         domain: "maramao.kkratter.com",
+        summary: "The Pomodoro timer that stops you with cats. A native macOS menu bar app.",
         icon: { src: "/images/icons/maramao.png", width: 180, height: 180 },
       },
       {
-        kind: "website",
         id: "f4",
-        size: "2x1",
+        name: "F4",
         href: "https://f4.kkratter.com/",
-        label: "F4, Spotlight for your memes",
-        title: "F4 — Spotlight, but for your memes",
         domain: "f4.kkratter.com",
+        summary: "Spotlight, but for your memes. Press F4, type, and the GIF is on your clipboard.",
         icon: { src: "/images/icons/f4.png", width: 180, height: 180 },
       },
     ],
   },
-  {
-    id: "writing",
-    title: "Writing",
-    cards: [
-      {
-        kind: "website",
-        id: "substack",
-        size: "4x1",
-        mobile: { size: "2x1" },
-        href: "https://kkratter.substack.com/",
-        label: "Building. Always., the newsletter on Substack",
-        title: "Building. Always.",
-        domain: "kkratter.substack.com",
-        icon: { src: "/images/icons/substack.jpg", width: 64, height: 64 },
-        preview: {
-          src: "/images/substack.jpg",
-          width: 920,
-          height: 480,
-          alt: "Building. Always. newsletter cover",
-        },
-      },
-    ],
-    // Latest issues, newest first; listed under the newsletter card.
-    posts: [],
-  },
 ];
+
+export const writing = {
+  title: "Writing",
+  intro: "My newsletter on Substack.",
+  newsletter: {
+    name: "Building. Always.",
+    href: "https://kkratter.substack.com/",
+    domain: "kkratter.substack.com",
+    cover: {
+      src: "/images/substack.jpg",
+      width: 920,
+      height: 480,
+      alt: "Building. Always. newsletter cover",
+    },
+  },
+  /** Latest issues, newest first. */
+  posts: [] as Post[],
+};
 
 /** Profiles that identify the same person, used for JSON-LD `sameAs`. */
 export const sameAs = [
-  "https://www.linkedin.com/in/kkratter/",
-  "https://x.com/kkratter",
-  "https://github.com/kkratterf",
-  "https://www.kkratter.com/",
+  ...links.map((link) => link.href),
   "https://kkratter.substack.com/",
   "https://avely.me/kkratter",
 ];
