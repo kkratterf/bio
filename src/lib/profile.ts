@@ -4,7 +4,7 @@
  * one unit is one column of the 4-column desktop grid.
  */
 
-export type CardSize = "1x1" | "2x1" | "1x2" | "2x2";
+export type CardSize = "1x1" | "2x1" | "1x2" | "2x2" | "4x1";
 
 type BaseCard = {
   id: string;
@@ -41,10 +41,18 @@ export type WebsiteCard = BaseCard & {
 
 export type Card = MediaCard | MapCard | WebsiteCard;
 
+export type Post = {
+  title: string;
+  /** ISO date, e.g. "2026-10-01". */
+  date: string;
+  href: string;
+};
+
 export type Section = {
   id: string;
   title: string;
   cards: Card[];
+  posts?: Post[];
 };
 
 export const profile = {
@@ -150,20 +158,72 @@ export const sections: Section[] = [
       {
         kind: "website",
         id: "play2match",
-        size: "2x2",
+        size: "2x1",
         href: "https://www.play2match.it/",
         label: "play2match",
         title: "play2match",
         domain: "play2match.it",
         icon: { src: "/images/icons/play2match.png", width: 48, height: 48 },
       },
+    ],
+  },
+  {
+    id: "products",
+    title: "Products",
+    cards: [
+      {
+        kind: "website",
+        id: "m63",
+        size: "2x1",
+        href: "https://m63.it/",
+        label: "M63, the open map of the Italian startup ecosystem",
+        title: "M63 — The open map of Italian startups",
+        domain: "m63.it",
+        icon: { src: "/images/icons/m63.png", width: 192, height: 192 },
+      },
+      {
+        kind: "website",
+        id: "fratmscript",
+        size: "2x1",
+        href: "https://kkratterf.github.io/fratmscript/",
+        label: "FratmScript",
+        title: "FratmScript — JavaScript ma comme si deve 🤌",
+        domain: "kkratterf.github.io",
+        icon: "github",
+      },
+      {
+        kind: "website",
+        id: "maramao",
+        size: "2x1",
+        href: "https://maramao.kkratter.com/",
+        label: "Maramao, the Pomodoro timer that stops you with cats",
+        title: "Maramao — The Pomodoro timer that stops you with cats",
+        domain: "maramao.kkratter.com",
+        icon: { src: "/images/icons/maramao.png", width: 180, height: 180 },
+      },
+      {
+        kind: "website",
+        id: "f4",
+        size: "2x1",
+        href: "https://f4.kkratter.com/",
+        label: "F4, Spotlight for your memes",
+        title: "F4 — Spotlight, but for your memes",
+        domain: "f4.kkratter.com",
+        icon: { src: "/images/icons/f4.png", width: 180, height: 180 },
+      },
+    ],
+  },
+  {
+    id: "writing",
+    title: "Writing",
+    cards: [
       {
         kind: "website",
         id: "substack",
-        size: "2x2",
+        size: "4x1",
         mobile: { size: "2x1" },
         href: "https://kkratter.substack.com/",
-        label: "Building. Always. on Substack",
+        label: "Building. Always., the newsletter on Substack",
         title: "Building. Always.",
         domain: "kkratter.substack.com",
         icon: { src: "/images/icons/substack.jpg", width: 64, height: 64 },
@@ -175,43 +235,8 @@ export const sections: Section[] = [
         },
       },
     ],
-  },
-  {
-    id: "products",
-    title: "Products",
-    cards: [
-      {
-        kind: "website",
-        id: "c14",
-        size: "2x2",
-        href: "https://www.c14.so/",
-        label: "C14, open-source startup database",
-        title: "C14 — Open-source startup database",
-        domain: "c14.so",
-        icon: { src: "/images/icons/c14.png", width: 48, height: 48 },
-      },
-      {
-        kind: "website",
-        id: "m63",
-        size: "2x2",
-        href: "https://www.m63.club/",
-        label: "M63 Club",
-        title: "M63 Club — Keep the secret",
-        domain: "m63.club",
-        icon: { src: "/images/icons/m63.png", width: 48, height: 48 },
-      },
-      {
-        kind: "website",
-        id: "fratmscript",
-        size: "2x2",
-        mobile: { size: "2x1" },
-        href: "https://kkratterf.github.io/fratmscript/",
-        label: "FratmScript",
-        title: "FratmScript - JavaScript ma comme si deve 🤌",
-        domain: "kkratterf.github.io",
-        icon: "github",
-      },
-    ],
+    // Latest issues, newest first; listed under the newsletter card.
+    posts: [],
   },
 ];
 

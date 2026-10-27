@@ -1,13 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { profile } from "@/lib/profile";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  axes: ["opsz"],
+// PP Radio Grotesk, the typeface of the 2023 portfolio (kkratterf/portfolio23).
+const radioGrotesk = localFont({
+  variable: "--font-radio-grotesk",
+  src: [
+    { path: "../fonts/PPRadioGrotesk-200.woff2", weight: "200", style: "normal" },
+    { path: "../fonts/PPRadioGrotesk-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/PPRadioGrotesk-900.woff2", weight: "900", style: "normal" },
+  ],
   display: "swap",
 });
 
@@ -33,9 +37,10 @@ export const metadata: Metadata = {
     "design engineer",
     "Milan",
     "play2match",
-    "C14",
-    "M63 Club",
+    "M63",
     "FratmScript",
+    "Maramao",
+    "F4",
   ],
   alternates: {
     canonical: "/",
@@ -87,7 +92,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} antialiased`}>
+    <html lang="en" className={`${radioGrotesk.variable} antialiased`}>
       <body className="min-h-screen font-sans">{children}</body>
     </html>
   );

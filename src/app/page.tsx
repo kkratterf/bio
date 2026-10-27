@@ -22,7 +22,7 @@ export default function Home() {
             />
           </div>
           <div className="mt-8 ml-2 w-[calc(100%-8px)] max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
-            <h1 className="text-[32px] leading-[120%] font-bold tracking-[-1px] wrap-break-word whitespace-pre-wrap text-fg xl:text-[44px] xl:tracking-[-2px]">
+            <h1 className="text-[32px] leading-[120%] font-black tracking-[-0.5px] wrap-break-word whitespace-pre-wrap text-fg xl:text-[44px] xl:tracking-[-1px]">
               {profile.name}
             </h1>
             <p className="mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
@@ -49,6 +49,29 @@ export default function Home() {
                   <BentoCard key={card.id} card={card} />
                 ))}
               </ul>
+              {section.posts && section.posts.length > 0 && (
+                <ol role="list" className="mt-6 flex flex-col">
+                  {section.posts.map((post) => (
+                    <li key={post.href}>
+                      <a
+                        href={post.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-baseline justify-between gap-4 rounded-xl px-3 py-3 transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                      >
+                        <span className="line-clamp-1 text-sm text-fg">{post.title}</span>
+                        <time dateTime={post.date} className="shrink-0 text-xs text-muted-fg tabular-nums">
+                          {new Date(post.date).toLocaleDateString("en-GB", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          })}
+                        </time>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              )}
             </section>
           ))}
         </div>

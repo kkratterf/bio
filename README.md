@@ -7,7 +7,7 @@ Personal bio page of Federico Kratter Thaler, a Next.js rebuild of
 
 - Next.js 16 (App Router, static prerender) + React 19
 - Tailwind CSS v4
-- Inter via `next/font` (self-hosted, no layout shift)
+- PP Radio Grotesk (from portfolio23) via `next/font/local`, self-hosted
 - `next/image` for every picture (AVIF/WebP, responsive `sizes`)
 
 ## Content

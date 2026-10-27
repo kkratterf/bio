@@ -7,6 +7,8 @@ const mobileSize: Record<CardSize, string> = {
   "2x1": "col-span-2 row-span-1",
   "1x2": "col-span-1 row-span-2",
   "2x2": "col-span-2 row-span-2",
+  // The mobile grid has two columns, so a full-width card is two wide.
+  "4x1": "col-span-2 row-span-1",
 };
 
 const desktopSize: Record<CardSize, string> = {
@@ -14,6 +16,7 @@ const desktopSize: Record<CardSize, string> = {
   "2x1": "xl:col-span-2 xl:row-span-1",
   "1x2": "xl:col-span-1 xl:row-span-2",
   "2x2": "xl:col-span-2 xl:row-span-2",
+  "4x1": "xl:col-span-4 xl:row-span-1",
 };
 
 const mobileOrder: Record<number, string> = {
@@ -30,6 +33,7 @@ const desktopWidth: Record<CardSize, number> = {
   "2x1": 398,
   "1x2": 187,
   "2x2": 398,
+  "4x1": 820,
 };
 
 function imageSizes(card: Card) {
@@ -161,20 +165,34 @@ function Website({ card }: { card: WebsiteCard }) {
           <p className="line-clamp-1 text-xs text-muted-fg">{card.domain}</p>
         </div>
       </div>
-      {card.preview && (
-        // On the short mobile tile the preview sits on the right half.
-        <div className="absolute inset-y-4 right-4 z-10 w-[45%] overflow-hidden rounded-xl bg-muted xl:relative xl:inset-auto xl:mt-4 xl:w-full">
-          <Image
-            src={card.preview.src}
-            alt={card.preview.alt}
-            width={card.preview.width}
-            height={card.preview.height}
-            sizes="(min-width: 1280px) 366px, 160px"
-            className="size-full animate-reveal object-cover object-left xl:h-auto"
-            draggable={false}
-          />
-        </div>
-      )}
+      {card.preview &&
+        (card.size === "2x2" ? (
+          // On the short mobile tile the preview sits on the right half.
+          <div className="absolute inset-y-4 right-4 z-10 w-[45%] overflow-hidden rounded-xl bg-muted xl:relative xl:inset-auto xl:mt-4 xl:w-full">
+            <Image
+              src={card.preview.src}
+              alt={card.preview.alt}
+              width={card.preview.width}
+              height={card.preview.height}
+              sizes="(min-width: 1280px) 366px, 160px"
+              className="size-full animate-reveal object-cover object-left xl:h-auto"
+              draggable={false}
+            />
+          </div>
+        ) : (
+          // Short tiles keep the preview on the right at every size.
+          <div className="absolute inset-y-4 right-4 z-10 w-[45%] overflow-hidden rounded-xl bg-muted xl:w-1/2">
+            <Image
+              src={card.preview.src}
+              alt={card.preview.alt}
+              width={card.preview.width}
+              height={card.preview.height}
+              sizes="(min-width: 1280px) 400px, 160px"
+              className="size-full animate-reveal object-cover object-left"
+              draggable={false}
+            />
+          </div>
+        ))}
       <CardLink href={card.href} label={card.label} />
     </div>
   );

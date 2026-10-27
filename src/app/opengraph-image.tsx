@@ -7,12 +7,12 @@ export const alt = `${profile.name} — ${profile.bio}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const fontDir = join(process.cwd(), "node_modules/@fontsource/inter/files");
+const fontDir = join(process.cwd(), "src/fonts");
 
 export default async function OpengraphImage() {
   const [regular, bold, avatar] = await Promise.all([
-    readFile(join(fontDir, "inter-latin-400-normal.woff")),
-    readFile(join(fontDir, "inter-latin-700-normal.woff")),
+    readFile(join(fontDir, "PPRadioGrotesk-400.woff")),
+    readFile(join(fontDir, "PPRadioGrotesk-900.woff")),
     readFile(join(process.cwd(), "public", profile.avatar.src), "base64"),
   ]);
 
@@ -27,7 +27,7 @@ export default async function OpengraphImage() {
           justifyContent: "center",
           padding: "0 96px",
           background: "#ffffff",
-          fontFamily: "Inter",
+          fontFamily: "PP Radio Grotesk",
         }}
       >
         <img
@@ -41,7 +41,7 @@ export default async function OpengraphImage() {
           style={{
             marginTop: 48,
             fontSize: 80,
-            fontWeight: 700,
+            fontWeight: 900,
             letterSpacing: -3,
             lineHeight: 1.2,
             color: "#18181b",
@@ -57,8 +57,8 @@ export default async function OpengraphImage() {
     {
       ...size,
       fonts: [
-        { name: "Inter", data: regular, weight: 400, style: "normal" },
-        { name: "Inter", data: bold, weight: 700, style: "normal" },
+        { name: "PP Radio Grotesk", data: regular, weight: 400, style: "normal" },
+        { name: "PP Radio Grotesk", data: bold, weight: 900, style: "normal" },
       ],
     },
   );
