@@ -69,9 +69,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  other: {
-    "profile:username": profile.handle,
-  },
   formatDetection: {
     telephone: false,
     email: false,
