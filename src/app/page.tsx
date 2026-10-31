@@ -1,8 +1,10 @@
 import Image from "next/image";
-import { BentoCard } from "@/components/bento-card";
 import { JsonLd } from "@/components/json-ld";
 import { ProjectCard } from "@/components/project-card";
-import { about, profile, projectSections } from "@/lib/profile";
+import { SocialCard } from "@/components/social-card";
+import { profile, projectSections, socials } from "@/lib/profile";
+
+const grid = "mt-3 grid grid-cols-1 gap-5 xl:grid-cols-2 xl:gap-6";
 
 export default function Home() {
   return (
@@ -33,18 +35,18 @@ export default function Home() {
         </header>
 
         <div className="mt-10 flex w-full max-w-[428px] flex-col gap-10 px-6 xl:mt-0 xl:gap-12 xl:w-[820px] xl:max-w-none xl:flex-none xl:px-0">
-          <section className="bento-section" aria-labelledby={`${about.id}-title`}>
-            <SectionTitle id={about.id}>{about.title}</SectionTitle>
-            <ul role="list" className="bento mt-3">
-              {about.cards.map((card) => (
-                <BentoCard key={card.id} card={card} />
+          <section aria-labelledby="about-title">
+            <SectionTitle id="about">About</SectionTitle>
+            <ul role="list" className={grid}>
+              {socials.map((social) => (
+                <SocialCard key={social.id} social={social} />
               ))}
             </ul>
           </section>
           {projectSections.map((section) => (
             <section key={section.id} aria-labelledby={`${section.id}-title`}>
               <SectionTitle id={section.id}>{section.title}</SectionTitle>
-              <ul role="list" className="mt-3 grid grid-cols-1 gap-5 xl:grid-cols-2 xl:gap-6">
+              <ul role="list" className={grid}>
                 {section.projects.map((project) => (
                   <ProjectCard key={project.id} project={project} />
                 ))}

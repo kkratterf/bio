@@ -15,10 +15,6 @@
   --ring: #a3a3a3;
   --radius-card: 1.125rem;
   --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --label-bg: rgb(255 255 255 / 0.7);
-  --pill-border: rgb(212 212 216 / 0.6);
-  --marker: #3d81ff;
-  --marker-pulse: #679bff;
 
   color-scheme: light;
 }
@@ -39,24 +35,12 @@
   --shadow-card: var(--card-shadow);
 
   --animate-profile-in: profile-in 240ms ease-out 60ms backwards;
-  --animate-marker-pulse: marker-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
   --animate-reveal: reveal 300ms ease-out both;
 
   @keyframes profile-in {
     from {
       opacity: 0;
       transform: translateY(-1.25rem);
-    }
-  }
-
-  @keyframes marker-pulse {
-    0% {
-      opacity: 0.4;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    to {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(4);
     }
   }
 
@@ -74,44 +58,6 @@ html {
 body {
   background: var(--bg);
   color: var(--fg);
-}
-
-/*
- * Square grid cells: one row is as tall as one column is wide. The section
- * around the grid is the size container, since an element can't query itself.
- */
-.bento-section {
-  container-type: inline-size;
-}
-
-.bento {
-  --cols: 2;
-  --gap: 1.25rem;
-  display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-  grid-auto-rows: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols));
-  grid-auto-flow: row dense;
-  gap: var(--gap);
-}
-
-@media (min-width: 80rem) {
-  .bento {
-    --cols: 4;
-    --gap: 1.5rem;
-  }
-}
-
-/* Avely enlarges link hit areas to at least 44px. */
-.touch-target::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  min-width: 44px;
-  height: 100%;
-  min-height: 44px;
-  transform: translate(-50%, -50%);
 }
 
 @media (prefers-reduced-motion: reduce) {

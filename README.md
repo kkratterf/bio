@@ -14,11 +14,13 @@ Personal bio page of Federico Kratter Thaler, a Next.js rebuild of
 ## Content
 
 All content lives in [`src/lib/profile.ts`](src/lib/profile.ts): name, bio,
-sections and cards. Images are in `public/images`.
+social profiles (`socials`) and the project sections (`projectSections`).
+Images are in `public/images`.
 
-Card sizes follow the Avely bento grid: `1x1`, `2x1`, `1x2`, `2x2`, where one
-unit is one column of the 4-column desktop grid (187px cells, 24px gap, 820px
-wide). Below 1280px the grid switches to 2 columns.
+Every card is square, in a grid of two columns on desktop and one below
+1280px. Cards follow the coss ui Frame used in M63: a tinted shell with the
+header, and a white inner panel with a description and a preview
+([`frame-card.tsx`](src/components/frame-card.tsx)).
 
 ## SEO
 

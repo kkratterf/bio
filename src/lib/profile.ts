@@ -1,38 +1,27 @@
 /**
  * Every piece of content shown on the page lives here, so the bio can be
- * edited without touching layout code. Grid sizes mirror the Avely bento grid:
- * one unit is one column of the 4-column desktop grid.
+ * edited without touching layout code.
  */
 
-export type CardSize = "1x1" | "2x1" | "1x2" | "2x2";
+import type { Brand } from "@/components/brand-icon";
 
-type BaseCard = {
+/** A social profile, shown as a square card in the About grid. */
+export type Social = {
   id: string;
-  /** Size on the 4-column desktop grid. */
-  size: CardSize;
-  /**
-   * Avely keeps a separate 2-column layout for small screens: a card can take
-   * another shape there and appear in another position.
-   */
-  mobile?: { size?: CardSize; order?: number };
+  brand: Brand;
   href: string;
   /** Accessible name for the whole card link. */
   label: string;
+  title: string;
+  handle: string;
+  /** Profile URL without the scheme, shown on the preview. */
+  url: string;
+  /** Verb on the badge, e.g. "Follow". */
+  action: string;
+  description: string;
+  /** CSS background for the brand preview. */
+  background: string;
 };
-
-export type MediaCard = BaseCard & {
-  kind: "media";
-  image: { src: string; width: number; height: number; alt: string };
-};
-
-export type MapCard = BaseCard & {
-  kind: "map";
-  place: string;
-  image: { src: string; width: number; height: number };
-};
-
-
-export type Card = MediaCard | MapCard;
 
 export type Post = {
   title: string;
@@ -50,17 +39,10 @@ export type Project = {
   title: string;
   domain: string;
   /** Shown as a badge next to the title. */
-  status: "Building" | "Live" | "Newsletter";
+  status: "Building" | "Live" | "Newsletter" | "Archived";
   description: string;
   icon: { src: string; width: number; height: number } | "github";
   preview: { src: string; width: number; height: number; alt: string };
-};
-
-/** The bento grid of profiles at the top of the page. */
-export type BentoSection = {
-  id: string;
-  title: string;
-  cards: Card[];
 };
 
 export type ProjectSection = {
@@ -93,78 +75,57 @@ export const profile = {
   locale: "en_US",
 } as const;
 
-export const about: BentoSection = {
-  id: "about",
-  title: "About",
-  cards: [
-    {
-      kind: "map",
-      id: "location",
-      size: "1x2",
-      mobile: { size: "2x1", order: 2 },
-      place: "Milan, Italy",
-      href: "https://www.google.com/maps/search/?api=1&query=45.46426590913465%2C9.18814879103845",
-      label: "Milan, Italy on Google Maps",
-      image: { src: "/images/map-milan.png", width: 370, height: 792 },
-    },
-    {
-      kind: "media",
-      id: "linkedin",
-      size: "2x1",
-      mobile: { order: 1 },
-      href: "https://www.linkedin.com/in/kkratter/",
-      label: "Federico Kratter Thaler on LinkedIn",
-      image: {
-        src: "/images/linkedin.png",
-        width: 1170,
-        height: 525,
-        alt: "LinkedIn, @kkratter",
-      },
-    },
-    {
-      kind: "media",
-      id: "x",
-      size: "1x1",
-      mobile: { order: 4 },
-      href: "https://x.com/kkratter",
-      label: "Federico Kratter Thaler on X (Twitter)",
-      image: {
-        src: "/images/twitter.png",
-        width: 525,
-        height: 525,
-        alt: "Twitter, @kkratter",
-      },
-    },
-    {
-      kind: "media",
-      id: "github",
-      size: "1x1",
-      mobile: { order: 5 },
-      href: "https://github.com/kkratterf",
-      label: "Federico Kratter Thaler on GitHub",
-      image: {
-        src: "/images/github.png",
-        width: 525,
-        height: 525,
-        alt: "GitHub, @kkratterf",
-      },
-    },
-    {
-      kind: "media",
-      id: "website",
-      size: "2x1",
-      mobile: { order: 3 },
-      href: "https://www.kkratter.com/",
-      label: "Portfolio 2023, kkratter.com",
-      image: {
-        src: "/images/portfolio.png",
-        width: 1170,
-        height: 525,
-        alt: "Portfolio 2023, Product & Design System Designer",
-      },
-    },
-  ],
-};
+export const socials: Social[] = [
+  {
+    id: "linkedin",
+    brand: "linkedin",
+    href: "https://www.linkedin.com/in/kkratter/",
+    label: "Federico Kratter Thaler on LinkedIn",
+    title: "LinkedIn",
+    handle: "@kkratter",
+    url: "linkedin.com/in/kkratter",
+    action: "Connect",
+    description: "Where I've worked, what I've led, and the occasional longer post about building products.",
+    background: "linear-gradient(135deg, #0a66c2 0%, #004182 100%)",
+  },
+  {
+    id: "github",
+    brand: "github",
+    href: "https://github.com/kkratterf",
+    label: "Federico Kratter Thaler on GitHub",
+    title: "GitHub",
+    handle: "@kkratterf",
+    url: "github.com/kkratterf",
+    action: "Follow",
+    description: "Where the code lives: Maramao, F4, FratmScript and this site, all open source.",
+    background: "linear-gradient(135deg, #2b3137 0%, #0d1117 100%)",
+  },
+  {
+    id: "x",
+    brand: "x",
+    href: "https://x.com/kkratter",
+    label: "Federico Kratter Thaler on X (Twitter)",
+    title: "X",
+    handle: "@kkratter",
+    url: "x.com/kkratter",
+    action: "Follow",
+    description: "Short thoughts on design and product, and whatever I'm shipping this week.",
+    background: "linear-gradient(135deg, #2a2a2a 0%, #000000 100%)",
+  },
+  {
+    id: "instagram",
+    brand: "instagram",
+    href: "https://www.instagram.com/kkratter/",
+    label: "Federico Kratter Thaler on Instagram",
+    title: "Instagram",
+    handle: "@kkratter",
+    url: "instagram.com/kkratter",
+    action: "Follow",
+    description: "Life away from the keyboard, mostly in pictures.",
+    background:
+      "radial-gradient(circle at 20% 110%, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%)",
+  },
+];
 
 export const projectSections: ProjectSection[] = [
   {
@@ -180,7 +141,7 @@ export const projectSections: ProjectSection[] = [
         status: "Building",
         description:
           "Make new friends through sport. Mixed beach volley matches across Italy, with teams composed by level.",
-        icon: { src: "/images/icons/play2match.png", width: 48, height: 48 },
+        icon: { src: "/images/icons/play2match.png", width: 180, height: 180 },
         preview: {
           src: "/images/og/play2match.jpg",
           width: 1200,
@@ -197,7 +158,7 @@ export const projectSections: ProjectSection[] = [
         status: "Building",
         description:
           "The open map of the Italian startup ecosystem: startups, investors, founders and funding rounds, plus a club for founders.",
-        icon: { src: "/images/icons/m63.png", width: 192, height: 192 },
+        icon: { src: "/images/icons/m63.png", width: 180, height: 180 },
         preview: {
           src: "/images/og/m63.jpg",
           width: 1200,
@@ -289,6 +250,29 @@ export const projectSections: ProjectSection[] = [
     // Latest issues, newest first; listed under the newsletter card.
     posts: [],
   },
+  {
+    id: "archive",
+    title: "Archive",
+    projects: [
+      {
+        id: "portfolio",
+        href: "https://www.kkratter.com/",
+        label: "My previous portfolio, kkratter.com",
+        title: "Portfolio",
+        domain: "kkratter.com",
+        status: "Archived",
+        description:
+          "My previous portfolio, from before 2023: product and design system work, before I started shipping my own products.",
+        icon: { src: "/images/icons/portfolio.png", width: 180, height: 180 },
+        preview: {
+          src: "/images/og/portfolio.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Federico Kratter Thaler, portfolio cover",
+        },
+      },
+    ],
+  },
 ];
 
 /** Profiles that identify the same person, used for JSON-LD `sameAs`. */
@@ -298,5 +282,6 @@ export const sameAs = [
   "https://github.com/kkratterf",
   "https://www.kkratter.com/",
   "https://kkratter.substack.com/",
+  "https://www.instagram.com/kkratter/",
   "https://avely.me/kkratter",
 ];
