@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: profile.bio,
     start_url: "/",
     display: "browser",
-    background_color: "#ffffff",
-    theme_color: "#ffffff",
+    background_color: "#fafafa",
+    theme_color: "#fafafa",
     icons: [
       { src: "/icon", sizes: "512x512", type: "image/png" },
       { src: "/apple-icon", sizes: "180x180", type: "image/png" },

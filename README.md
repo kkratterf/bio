@@ -7,17 +7,23 @@ Personal bio page of Federico Kratter Thaler, a Next.js rebuild of
 
 - Next.js 16 (App Router, static prerender) + React 19
 - Tailwind CSS v4
-- Inter via `next/font` (self-hosted, no layout shift)
+- Inter via `next/font` (self-hosted, no layout shift); colours from the
+  coss.com (coss ui) light theme
+- Mattone, the display face of M63, for the name (`src/fonts`, SIL Open Font
+  License 1.1, see `src/fonts/MATTONE-OFL.txt`)
 - `next/image` for every picture (AVIF/WebP, responsive `sizes`)
 
 ## Content
 
 All content lives in [`src/lib/profile.ts`](src/lib/profile.ts): name, bio,
-sections and cards. Images are in `public/images`.
+social profiles (`socials`) and the project sections (`projectSections`).
+Images are in `public/images`.
 
-Card sizes follow the Avely bento grid: `1x1`, `2x1`, `1x2`, `2x2`, where one
-unit is one column of the 4-column desktop grid (187px cells, 24px gap, 820px
-wide). Below 1280px the grid switches to 2 columns.
+Every card is square. About is a row of four profile cards (two per row
+below 1280px); the project sections use two columns on desktop and one below
+1280px. Cards follow the coss ui Frame used in M63: a tinted shell with the
+header, and a white inner panel with a description and a preview
+([`frame-card.tsx`](src/components/frame-card.tsx)).
 
 ## SEO
 

@@ -1,14 +1,17 @@
 import Image from "next/image";
-import { BentoCard } from "@/components/bento-card";
 import { JsonLd } from "@/components/json-ld";
-import { profile, sections } from "@/lib/profile";
+import { ProjectCard } from "@/components/project-card";
+import { SocialCard } from "@/components/social-card";
+import { profile, projectSections, socials } from "@/lib/profile";
+
+const grid = "mt-3 grid grid-cols-1 gap-5 xl:grid-cols-2 xl:gap-6";
 
 export default function Home() {
   return (
     <>
       <JsonLd />
       <main className="relative mx-auto flex min-h-screen w-full max-w-[1728px] flex-col items-center pb-16 xl:flex-row xl:items-start xl:p-16">
-        <header className="w-full max-w-[428px] animate-profile-in px-10 pt-12 xl:sticky xl:top-16 xl:mr-20 xl:max-w-none xl:min-w-0 xl:flex-1 xl:px-0 xl:pt-0">
+        <header className="w-full max-w-[428px] animate-profile-in px-6 pt-12 xl:sticky xl:top-16 xl:mr-20 xl:max-w-none xl:min-w-0 xl:flex-1 xl:px-0 xl:pt-0">
           <div className="relative size-30 shrink-0 xl:size-46">
             <Image
               src={profile.avatar.src}
@@ -21,8 +24,8 @@ export default function Home() {
               draggable={false}
             />
           </div>
-          <div className="mt-8 ml-2 w-[calc(100%-8px)] max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
-            <h1 className="text-[32px] leading-[120%] font-bold tracking-[-1px] wrap-break-word whitespace-pre-wrap text-fg xl:text-[44px] xl:tracking-[-2px]">
+          <div className="mt-8 ml-1 w-[calc(100%-8px)] xl:ml-2 max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
+            <h1 className="font-display text-[26px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[34px]">
               {profile.name}
             </h1>
             <p className="mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
@@ -31,31 +34,61 @@ export default function Home() {
           </div>
         </header>
 
-        <div className="mt-10 flex w-full max-w-[428px] flex-col gap-6 px-6 xl:mt-0 xl:w-[820px] xl:max-w-none xl:flex-none xl:px-0">
-          {sections.map((section) => (
-            <section
-              key={section.id}
-              className="bento-section"
-              aria-labelledby={`${section.id}-title`}
-            >
-              <h2
-                id={`${section.id}-title`}
-                className="flex h-[46px] items-center px-3 text-lg leading-tight font-semibold text-fg"
-              >
-                {section.title}
-              </h2>
-              <ul role="list" className="bento mt-6">
-                {section.cards.map((card) => (
-                  <BentoCard key={card.id} card={card} />
+        <div className="mt-10 flex w-full max-w-[428px] flex-col gap-10 px-6 xl:mt-0 xl:gap-12 xl:w-[820px] xl:max-w-none xl:flex-none xl:px-0">
+          <section aria-labelledby="about-title">
+            <SectionTitle id="about">About</SectionTitle>
+            <ul role="list" className="mt-3 grid grid-cols-2 gap-3 xl:grid-cols-4 xl:gap-4">
+              {socials.map((social) => (
+                <SocialCard key={social.id} social={social} />
+              ))}
+            </ul>
+          </section>
+          {projectSections.map((section) => (
+            <section key={section.id} aria-labelledby={`${section.id}-title`}>
+              <SectionTitle id={section.id}>{section.title}</SectionTitle>
+              <ul role="list" className={grid}>
+                {section.projects.map((project) => (
+                  <ProjectCard key={project.id} project={project} />
                 ))}
               </ul>
+              {section.posts && section.posts.length > 0 && (
+                <ol role="list" className="mt-3 flex flex-col">
+                  {section.posts.map((post) => (
+                    <li key={post.href}>
+                      <a
+                        href={post.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-baseline justify-between gap-4 rounded-xl px-3 py-3 transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                      >
+                        <span className="line-clamp-1 text-sm text-fg">{post.title}</span>
+                        <time dateTime={post.date} className="shrink-0 text-xs text-muted-fg tabular-nums">
+                          {new Date(post.date).toLocaleDateString("en-GB", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          })}
+                        </time>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              )}
             </section>
           ))}
         </div>
       </main>
-      <footer className="mb-10 flex w-full justify-center text-xs text-muted-fg/80">
+      <footer className="mb-10 flex w-full justify-center text-xs text-muted-fg">
         <p>© {profile.name}</p>
       </footer>
     </>
+  );
+}
+
+function SectionTitle({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <h2 id={`${id}-title`} className="px-1 text-lg leading-6 font-semibold tracking-[-0.01em] text-fg">
+      {children}
+    </h2>
   );
 }

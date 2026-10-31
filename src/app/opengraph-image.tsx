@@ -10,9 +10,9 @@ export const contentType = "image/png";
 const fontDir = join(process.cwd(), "node_modules/@fontsource/inter/files");
 
 export default async function OpengraphImage() {
-  const [regular, bold, avatar] = await Promise.all([
+  const [regular, mattone, avatar] = await Promise.all([
     readFile(join(fontDir, "inter-latin-400-normal.woff")),
-    readFile(join(fontDir, "inter-latin-700-normal.woff")),
+    readFile(join(process.cwd(), "src/fonts/mattone.woff")),
     readFile(join(process.cwd(), "public", profile.avatar.src), "base64"),
   ]);
 
@@ -26,7 +26,7 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "0 96px",
-          background: "#ffffff",
+          background: "#fafafa",
           fontFamily: "Inter",
         }}
       >
@@ -40,16 +40,15 @@ export default async function OpengraphImage() {
         <div
           style={{
             marginTop: 48,
-            fontSize: 80,
-            fontWeight: 700,
-            letterSpacing: -3,
-            lineHeight: 1.2,
-            color: "#18181b",
+            fontFamily: "Mattone",
+            fontSize: 66,
+            lineHeight: 1.15,
+            color: "#262626",
           }}
         >
           {profile.name}
         </div>
-        <div style={{ marginTop: 16, fontSize: 40, color: "#71717a" }}>
+        <div style={{ marginTop: 16, fontSize: 40, color: "#686868" }}>
           {profile.bio}
         </div>
       </div>
@@ -58,7 +57,7 @@ export default async function OpengraphImage() {
       ...size,
       fonts: [
         { name: "Inter", data: regular, weight: 400, style: "normal" },
-        { name: "Inter", data: bold, weight: 700, style: "normal" },
+        { name: "Mattone", data: mattone, weight: 400, style: "normal" },
       ],
     },
   );

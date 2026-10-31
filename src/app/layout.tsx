@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { profile } from "@/lib/profile";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
@@ -8,6 +9,14 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   axes: ["opsz"],
+  display: "swap",
+});
+
+// Mattone (OFL-1.1, see src/fonts/MATTONE-OFL.txt), the display face of M63,
+// used only for the name.
+const mattone = localFont({
+  src: "../fonts/mattone.woff2",
+  variable: "--font-mattone",
   display: "swap",
 });
 
@@ -33,9 +42,10 @@ export const metadata: Metadata = {
     "design engineer",
     "Milan",
     "play2match",
-    "C14",
-    "M63 Club",
+    "M63",
     "FratmScript",
+    "Maramao",
+    "F4",
   ],
   alternates: {
     canonical: "/",
@@ -81,13 +91,13 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#ffffff",
+  themeColor: "#fafafa",
   colorScheme: "light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} ${mattone.variable} antialiased`}>
       <body className="min-h-screen font-sans">{children}</body>
     </html>
   );
