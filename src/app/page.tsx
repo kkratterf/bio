@@ -31,6 +31,9 @@ export default function Home() {
             <p className="mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
               {profile.bio}
             </p>
+            <p className="mt-4 text-[15px] leading-6 text-muted-fg xl:text-base xl:leading-7">
+              {profile.summary}
+            </p>
           </div>
         </header>
 

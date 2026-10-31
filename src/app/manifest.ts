@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: profile.name,
     short_name: "kkratter",
-    description: profile.bio,
+    description: profile.description,
     start_url: "/",
     display: "browser",
     background_color: "#fafafa",

@@ -20,14 +20,15 @@ const mattone = localFont({
   display: "swap",
 });
 
-const title = profile.name;
-const description = profile.bio;
+// About 60 characters: name first, then the roles people search for.
+const title = `${profile.name} · Builder, CPTO & Product Designer`;
+const description = profile.description;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: title,
-    template: `%s · ${title}`,
+    template: `%s · ${profile.name}`,
   },
   description,
   applicationName: title,
@@ -38,14 +39,17 @@ export const metadata: Metadata = {
     profile.name,
     "Federico Kratter",
     profile.handle,
-    "product designer",
+    ...profile.roles,
+    "CPTO play2match",
+    "product designer Milan",
+    "product engineer Milan",
     "design engineer",
-    "Milan",
+    "startup founder Italy",
     "play2match",
     "M63",
-    "FratmScript",
     "Maramao",
     "F4",
+    "FratmScript",
   ],
   alternates: {
     canonical: "/",
@@ -53,7 +57,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     url: "/",
-    siteName: title,
+    siteName: profile.name,
     title,
     description,
     locale: profile.locale,

@@ -43,6 +43,13 @@ Vercel at https://kkratter.com. Read `README.md` first.
   `projectSections`, so adding them to `profile.ts` is enough).
 - Absolute URLs come from `siteUrl` in `src/lib/site.ts`; never hardcode the
   domain.
+- Bump `lastUpdated` in `src/lib/site.ts` when content changes (sitemap and
+  JSON-LD `dateModified`).
+- Title stays about 60 characters, meta description about 150; both are built
+  from `profile.roles` and `profile.description`.
+- Each project needs a `schemaType` (WebApplication, SoftwareApplication,
+  WebSite or Blog) so its JSON-LD node is typed correctly.
+- `/llms.txt` is generated from `profile.ts`; check it after content changes.
 
 ## Layout
 

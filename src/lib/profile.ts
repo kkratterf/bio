@@ -10,7 +10,7 @@ export type Social = {
   id: string;
   brand: Brand;
   href: string;
-  /** Accessible name for the whole card link. */
+  /** Accessible name of the card link, e.g. "Federico Kratter Thaler on LinkedIn". */
   label: string;
   title: string;
   handle: string;
@@ -29,12 +29,16 @@ export type Post = {
 export type Project = {
   id: string;
   href: string;
-  /** Accessible name for the whole card link. */
-  label: string;
   title: string;
   domain: string;
   /** Shown as a badge next to the title. */
   status: "Building" | "Live" | "Newsletter" | "Archived";
+  /** schema.org type used for the project in JSON-LD. */
+  schemaType: "WebApplication" | "SoftwareApplication" | "WebSite" | "Blog";
+  /** For SoftwareApplication: e.g. "macOS". */
+  operatingSystem?: string;
+  /** For SoftwareApplication: schema.org applicationCategory. */
+  applicationCategory?: string;
   description: string;
   icon: { src: string; width: number; height: number } | "github";
   preview: { src: string; width: number; height: number; alt: string };
@@ -53,7 +57,33 @@ export const profile = {
   familyName: "Kratter Thaler",
   handle: "kkratter",
   bio: "I design products. I build them too.",
-  jobTitle: "Product designer & builder",
+  /** Roles, in the order people search for them. Used in titles and JSON-LD. */
+  roles: ["Builder", "CPTO", "Product Designer", "Product Engineer"],
+  jobTitle: "Builder, CPTO, Product Designer & Product Engineer",
+  /** Visible intro under the bio: the main indexable copy of the page. */
+  summary:
+    "I'm a builder from Milan. As CPTO of play2match I lead product and technology, I design products end to end and I ship them myself as a product engineer: today play2match and M63, plus a few indie apps for macOS.",
+  /** Meta description: about 150 characters, roles and projects first. */
+  description:
+    "Federico Kratter Thaler (kkratter): builder, CPTO, product designer and product engineer in Milan. Building play2match and M63, shipping indie apps.",
+  worksFor: {
+    name: "play2match",
+    url: "https://www.play2match.it/",
+    roleName: "CPTO",
+  },
+  knowsAbout: [
+    "Product design",
+    "Product engineering",
+    "Product management",
+    "Design systems",
+    "UX design",
+    "Startups",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Rust",
+    "macOS apps",
+  ],
   location: {
     locality: "Milan",
     country: "Italy",
@@ -117,8 +147,9 @@ export const projectSections: ProjectSection[] = [
     projects: [
       {
         id: "play2match",
+        schemaType: "WebApplication",
+        applicationCategory: "SportsApplication",
         href: "https://www.play2match.it/",
-        label: "play2match",
         title: "play2match",
         domain: "play2match.it",
         status: "Building",
@@ -134,8 +165,8 @@ export const projectSections: ProjectSection[] = [
       },
       {
         id: "m63",
+        schemaType: "WebSite",
         href: "https://m63.it/",
-        label: "M63, the open map of the Italian startup ecosystem",
         title: "M63",
         domain: "m63.it",
         status: "Building",
@@ -157,8 +188,10 @@ export const projectSections: ProjectSection[] = [
     projects: [
       {
         id: "maramao",
+        schemaType: "SoftwareApplication",
+        operatingSystem: "macOS",
+        applicationCategory: "ProductivityApplication",
         href: "https://maramao.kkratter.com/",
-        label: "Maramao, the Pomodoro timer that stops you with cats",
         title: "Maramao",
         domain: "maramao.kkratter.com",
         status: "Live",
@@ -174,8 +207,10 @@ export const projectSections: ProjectSection[] = [
       },
       {
         id: "f4",
+        schemaType: "SoftwareApplication",
+        operatingSystem: "macOS",
+        applicationCategory: "UtilitiesApplication",
         href: "https://f4.kkratter.com/",
-        label: "F4, Spotlight for your memes",
         title: "F4",
         domain: "f4.kkratter.com",
         status: "Live",
@@ -191,8 +226,9 @@ export const projectSections: ProjectSection[] = [
       },
       {
         id: "fratmscript",
+        schemaType: "SoftwareApplication",
+        applicationCategory: "DeveloperApplication",
         href: "https://fratmscript.kkratter.com/",
-        label: "FratmScript, JavaScript ma comme si deve",
         title: "FratmScript",
         domain: "fratmscript.kkratter.com",
         status: "Live",
@@ -214,8 +250,8 @@ export const projectSections: ProjectSection[] = [
     projects: [
       {
         id: "substack",
+        schemaType: "Blog",
         href: "https://kkratter.substack.com/",
-        label: "Building. Always., the newsletter on Substack",
         title: "Building. Always.",
         domain: "kkratter.substack.com",
         status: "Newsletter",
@@ -239,8 +275,8 @@ export const projectSections: ProjectSection[] = [
     projects: [
       {
         id: "portfolio",
+        schemaType: "WebSite",
         href: "https://portfolio.kkratter.com/",
-        label: "My previous portfolio, portfolio.kkratter.com",
         title: "Portfolio",
         domain: "portfolio.kkratter.com",
         status: "Archived",

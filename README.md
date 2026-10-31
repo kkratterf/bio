@@ -54,9 +54,12 @@ touch icons of each app). Card layout is in
   Twitter `summary_large_image`) in `src/app/layout.tsx`
 - Generated OG/Twitter image (`opengraph-image.tsx`, `twitter-image.tsx`)
 - Favicon and Apple touch icon generated from the avatar
-- JSON-LD `ProfilePage` + `Person` (with `sameAs`) + `ItemList` of projects
-- `sitemap.xml`, `robots.txt`, `manifest.webmanifest`
+- JSON-LD `WebSite` + `ProfilePage` + `Person` (roles, `worksFor`,
+  `knowsAbout`, `sameAs`) + `ItemList` of typed projects
+  (`SoftwareApplication`, `WebApplication`, `WebSite`, `Blog`)
+- `sitemap.xml`, `robots.txt`, `manifest.webmanifest`, `llms.txt` for AI search
 - Semantic HTML: one `h1`, one `section` + `h2` per group, card titles as `h3`
+  links (real anchor text, the click area covers the card)
 
 ## Configuration
 

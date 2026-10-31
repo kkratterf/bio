@@ -8,7 +8,6 @@ import type { ReactNode } from "react";
  */
 export function FrameCard({
   href,
-  label,
   icon,
   title,
   subtitle,
@@ -17,7 +16,6 @@ export function FrameCard({
   preview,
 }: {
   href: string;
-  label: string;
   icon: ReactNode;
   title: string;
   subtitle: string;
@@ -31,7 +29,18 @@ export function FrameCard({
         <header className="flex min-w-0 items-center gap-3 px-3 pt-2.5 pb-3.5">
           {icon}
           <div className="flex min-w-0 flex-1 flex-col">
-            <h3 className="line-clamp-1 text-sm font-semibold text-fg">{title}</h3>
+            {/* The title is the link, so its text is the anchor text; ::after
+                stretches the click area over the whole card. */}
+            <h3 className="line-clamp-1 text-sm font-semibold text-fg">
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener"
+                className="after:absolute after:inset-0 after:z-40 after:rounded-[1.25rem] focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring md:after:cursor-pointer"
+              >
+                {title}
+              </a>
+            </h3>
             <p className="line-clamp-1 text-xs text-muted-fg">{subtitle}</p>
           </div>
           <span className="inline-flex h-6 shrink-0 items-center gap-1.5 rounded-md border border-border bg-content px-2 text-xs font-medium text-fg shadow-card">
@@ -44,13 +53,6 @@ export function FrameCard({
             {preview}
           </div>
         </div>
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer me"
-          aria-label={label}
-          className="absolute inset-0 z-40 rounded-[inherit] focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:cursor-pointer"
-        />
       </article>
     </li>
   );

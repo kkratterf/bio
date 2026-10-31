@@ -15,7 +15,6 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <FrameCard
       href={project.href}
-      label={project.label}
       title={project.title}
       subtitle={project.domain}
       description={project.description}

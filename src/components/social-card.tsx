@@ -40,18 +40,21 @@ export function SocialCard({ social }: { social: Social }) {
         </div>
         <div className="flex min-w-0 items-center gap-2 px-2.5 pt-2.5 pb-2">
           <div className="flex min-w-0 flex-1 flex-col">
-            <h3 className="line-clamp-1 text-sm font-semibold text-fg">{social.title}</h3>
+            <h3 className="line-clamp-1 text-sm font-semibold text-fg">
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener me"
+                aria-label={social.label}
+                className="after:absolute after:inset-0 after:z-40 after:rounded-[1.25rem] focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring md:after:cursor-pointer"
+              >
+                {social.title}
+              </a>
+            </h3>
             <p className="line-clamp-1 text-xs text-muted-fg">{social.handle}</p>
           </div>
           <ArrowUpRight />
         </div>
-        <a
-          href={social.href}
-          target="_blank"
-          rel="noopener noreferrer me"
-          aria-label={social.label}
-          className="absolute inset-0 z-40 rounded-[inherit] focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:cursor-pointer"
-        />
       </article>
     </li>
   );
