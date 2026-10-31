@@ -41,7 +41,7 @@ export default async function OpengraphImage() {
           style={{
             marginTop: 48,
             fontFamily: "Mattone",
-            fontSize: 76,
+            fontSize: 66,
             lineHeight: 1.15,
             color: "#262626",
           }}

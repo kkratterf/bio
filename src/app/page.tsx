@@ -25,7 +25,7 @@ export default function Home() {
             />
           </div>
           <div className="mt-8 ml-2 w-[calc(100%-8px)] max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
-            <h1 className="font-display text-[30px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[40px]">
+            <h1 className="font-display text-[26px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[34px]">
               {profile.name}
             </h1>
             <p className="mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
