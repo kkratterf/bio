@@ -239,10 +239,10 @@ export const projectSections: ProjectSection[] = [
     projects: [
       {
         id: "portfolio",
-        href: "https://www.kkratter.com/",
-        label: "My previous portfolio, kkratter.com",
+        href: "https://portfolio.kkratter.com/",
+        label: "My previous portfolio, portfolio.kkratter.com",
         title: "Portfolio",
-        domain: "kkratter.com",
+        domain: "portfolio.kkratter.com",
         status: "Archived",
         description:
           "My previous portfolio, from before 2023: product and design system work, before I started shipping my own products.",
@@ -263,7 +263,6 @@ export const sameAs = [
   "https://www.linkedin.com/in/kkratter/",
   "https://x.com/kkratter",
   "https://github.com/kkratterf",
-  "https://www.kkratter.com/",
   "https://kkratter.substack.com/",
   "https://www.instagram.com/kkratter/",
   "https://avely.me/kkratter",

@@ -1,29 +1,52 @@
-# bio
+# kkratter.com
 
-Personal bio page of Federico Kratter Thaler, a Next.js rebuild of
-[avely.me/kkratter](https://avely.me/kkratter).
+Personal bio site of Federico Kratter Thaler, live at
+[kkratter.com](https://kkratter.com). One static page with every project,
+profile and piece of writing, built for SEO first.
 
 ## Stack
 
-- Next.js 16 (App Router, static prerender) + React 19
+- Next.js 16 (App Router, fully prerendered) + React 19 + TypeScript
 - Tailwind CSS v4
-- Inter via `next/font` (self-hosted, no layout shift); colours from the
-  coss.com (coss ui) light theme
+- Inter via `next/font` (self-hosted at build time; `@fontsource/inter` feeds
+  the generated OG image); colours from the coss ui (coss.com) light theme
 - Mattone, the display face of M63, for the name (`src/fonts`, SIL Open Font
   License 1.1, see `src/fonts/MATTONE-OFL.txt`)
 - `next/image` for every picture (AVIF/WebP, responsive `sizes`)
+- Hosted on Vercel, domain `kkratter.com` managed in Vercel DNS
 
-## Content
+## Getting started
 
-All content lives in [`src/lib/profile.ts`](src/lib/profile.ts): name, bio,
-social profiles (`socials`) and the project sections (`projectSections`).
-Images are in `public/images`.
+Requires Node 22 (see `.nvmrc`).
 
-Every card is square. About is a row of four profile cards (two per row
-below 1280px); the project sections use two columns on desktop and one below
-1280px. Cards follow the coss ui Frame used in M63: a tinted shell with the
-header, and a white inner panel with a description and a preview
-([`frame-card.tsx`](src/components/frame-card.tsx)).
+```bash
+npm install
+cp .env.example .env.local   # optional locally
+npm run dev                  # http://localhost:3000
+```
+
+| Script              | What it does                                  |
+| ------------------- | --------------------------------------------- |
+| `npm run dev`       | Dev server with Turbopack                     |
+| `npm run build`     | Production build                              |
+| `npm run start`     | Serve the production build                    |
+| `npm run lint`      | ESLint (Next.js core web vitals + TypeScript) |
+| `npm run lint:fix`  | ESLint with autofix                           |
+| `npm run typecheck` | Generate route types and run `tsc --noEmit`   |
+| `npm run check`     | Lint, typecheck and build: run before a PR    |
+
+## Editing content
+
+All content lives in [`src/lib/profile.ts`](src/lib/profile.ts):
+
+- `profile`: name, bio, job title, location, avatar
+- `socials`: the four About cards (LinkedIn, GitHub, X, Instagram)
+- `projectSections`: Projects, Writing (with `posts`, newest first) and Archive
+- `sameAs`: external profiles for the JSON-LD `Person`
+
+Images live in `public/images` (`og/` for card previews, `icons/` for Apple
+touch icons of each app). Card layout is in
+[`frame-card.tsx`](src/components/frame-card.tsx).
 
 ## SEO
 
@@ -33,23 +56,25 @@ header, and a white inner panel with a description and a preview
 - Favicon and Apple touch icon generated from the avatar
 - JSON-LD `ProfilePage` + `Person` (with `sameAs`) + `ItemList` of projects
 - `sitemap.xml`, `robots.txt`, `manifest.webmanifest`
-- Semantic HTML: one `h1`, one `section` + `h2` per group, card titles as `h3`,
-  descriptive link labels, `rel="me"` on profile links
+- Semantic HTML: one `h1`, one `section` + `h2` per group, card titles as `h3`
 
 ## Configuration
 
-Set the production origin so canonical URLs, sitemap and OG tags are absolute:
+| Variable               | Where                 | Value                  |
+| ---------------------- | --------------------- | ---------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Vercel, Production    | `https://kkratter.com` |
 
-```bash
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
-```
+It drives canonical URLs, OG tags, sitemap, robots and JSON-LD. When it is
+missing, Vercel's production domain is used, then `http://localhost:3000`.
+Preview deployments can leave it unset.
 
-On Vercel the production domain is picked up automatically when the variable is
-not set.
+## Deploy
 
-## Development
+Vercel builds every push: `main` goes to production on `kkratter.com`, every
+pull request gets a preview URL. `www.kkratter.com` redirects to the apex
+domain (set in Vercel → Project → Settings → Domains). GitHub Actions
+(`.github/workflows/ci.yml`) runs lint, typecheck and build on every PR.
 
-```bash
-npm install
-npm run dev
-```
+The previous portfolio lives at
+[portfolio.kkratter.com](https://portfolio.kkratter.com) (Vercel project
+`portfolio23`) and is linked from the Archive section.
