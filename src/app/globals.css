@@ -31,6 +31,7 @@
     var(--font-inter), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
+  --font-display: var(--font-mattone), var(--font-inter), ui-sans-serif, sans-serif;
   --radius-card: var(--radius-card);
   --shadow-card: var(--card-shadow);
 

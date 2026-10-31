@@ -25,7 +25,7 @@ export default function Home() {
             />
           </div>
           <div className="mt-8 ml-2 w-[calc(100%-8px)] max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
-            <h1 className="text-[32px] leading-[110%] font-semibold tracking-[-0.02em] wrap-break-word whitespace-pre-wrap text-fg xl:text-[44px]">
+            <h1 className="font-display text-[30px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[40px]">
               {profile.name}
             </h1>
             <p className="mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
@@ -37,7 +37,7 @@ export default function Home() {
         <div className="mt-10 flex w-full max-w-[428px] flex-col gap-10 px-6 xl:mt-0 xl:gap-12 xl:w-[820px] xl:max-w-none xl:flex-none xl:px-0">
           <section aria-labelledby="about-title">
             <SectionTitle id="about">About</SectionTitle>
-            <ul role="list" className={grid}>
+            <ul role="list" className="mt-3 grid grid-cols-2 gap-3 xl:grid-cols-4 xl:gap-4">
               {socials.map((social) => (
                 <SocialCard key={social.id} social={social} />
               ))}

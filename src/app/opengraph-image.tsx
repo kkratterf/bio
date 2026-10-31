@@ -10,9 +10,9 @@ export const contentType = "image/png";
 const fontDir = join(process.cwd(), "node_modules/@fontsource/inter/files");
 
 export default async function OpengraphImage() {
-  const [regular, semibold, avatar] = await Promise.all([
+  const [regular, mattone, avatar] = await Promise.all([
     readFile(join(fontDir, "inter-latin-400-normal.woff")),
-    readFile(join(fontDir, "inter-latin-600-normal.woff")),
+    readFile(join(process.cwd(), "src/fonts/mattone.woff")),
     readFile(join(process.cwd(), "public", profile.avatar.src), "base64"),
   ]);
 
@@ -40,10 +40,9 @@ export default async function OpengraphImage() {
         <div
           style={{
             marginTop: 48,
-            fontSize: 80,
-            fontWeight: 600,
-            letterSpacing: -2.4,
-            lineHeight: 1.2,
+            fontFamily: "Mattone",
+            fontSize: 76,
+            lineHeight: 1.15,
             color: "#262626",
           }}
         >
@@ -58,7 +57,7 @@ export default async function OpengraphImage() {
       ...size,
       fonts: [
         { name: "Inter", data: regular, weight: 400, style: "normal" },
-        { name: "Inter", data: semibold, weight: 600, style: "normal" },
+        { name: "Mattone", data: mattone, weight: 400, style: "normal" },
       ],
     },
   );

@@ -5,7 +5,7 @@
 
 import type { Brand } from "@/components/brand-icon";
 
-/** A social profile, shown as a square card in the About grid. */
+/** A social profile, shown as a compact square in the four-column About row. */
 export type Social = {
   id: string;
   brand: Brand;
@@ -14,12 +14,7 @@ export type Social = {
   label: string;
   title: string;
   handle: string;
-  /** Profile URL without the scheme, shown on the preview. */
-  url: string;
-  /** Verb on the badge, e.g. "Follow". */
-  action: string;
-  description: string;
-  /** CSS background for the brand preview. */
+  /** CSS background for the brand panel. */
   background: string;
 };
 
@@ -83,9 +78,6 @@ export const socials: Social[] = [
     label: "Federico Kratter Thaler on LinkedIn",
     title: "LinkedIn",
     handle: "@kkratter",
-    url: "linkedin.com/in/kkratter",
-    action: "Connect",
-    description: "Where I've worked, what I've led, and the occasional longer post about building products.",
     background: "linear-gradient(135deg, #0a66c2 0%, #004182 100%)",
   },
   {
@@ -95,9 +87,6 @@ export const socials: Social[] = [
     label: "Federico Kratter Thaler on GitHub",
     title: "GitHub",
     handle: "@kkratterf",
-    url: "github.com/kkratterf",
-    action: "Follow",
-    description: "Where the code lives: Maramao, F4, FratmScript and this site, all open source.",
     background: "linear-gradient(135deg, #2b3137 0%, #0d1117 100%)",
   },
   {
@@ -107,9 +96,6 @@ export const socials: Social[] = [
     label: "Federico Kratter Thaler on X (Twitter)",
     title: "X",
     handle: "@kkratter",
-    url: "x.com/kkratter",
-    action: "Follow",
-    description: "Short thoughts on design and product, and whatever I'm shipping this week.",
     background: "linear-gradient(135deg, #2a2a2a 0%, #000000 100%)",
   },
   {
@@ -119,9 +105,6 @@ export const socials: Social[] = [
     label: "Federico Kratter Thaler on Instagram",
     title: "Instagram",
     handle: "@kkratter",
-    url: "instagram.com/kkratter",
-    action: "Follow",
-    description: "Life away from the keyboard, mostly in pictures.",
     background:
       "radial-gradient(circle at 20% 110%, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%)",
   },
