@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <JsonLd />
       <main className="relative mx-auto flex min-h-screen w-full max-w-[1728px] flex-col items-center pb-16 xl:flex-row xl:items-start xl:p-16">
-        <header className="w-full max-w-[428px] animate-profile-in px-10 pt-12 xl:sticky xl:top-16 xl:mr-20 xl:max-w-none xl:min-w-0 xl:flex-1 xl:px-0 xl:pt-0">
+        <header className="w-full max-w-[428px] animate-profile-in px-6 pt-12 xl:sticky xl:top-16 xl:mr-20 xl:max-w-none xl:min-w-0 xl:flex-1 xl:px-0 xl:pt-0">
           <div className="relative size-30 shrink-0 xl:size-46">
             <Image
               src={profile.avatar.src}
@@ -24,7 +24,7 @@ export default function Home() {
               draggable={false}
             />
           </div>
-          <div className="mt-8 ml-2 w-[calc(100%-8px)] max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
+          <div className="mt-8 ml-1 w-[calc(100%-8px)] xl:ml-2 max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
             <h1 className="font-display text-[26px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[34px]">
               {profile.name}
             </h1>
