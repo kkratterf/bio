@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Card, CardSize, MapCard, MediaCard, WebsiteCard } from "@/lib/profile";
+import type { Card, CardSize, MapCard, MediaCard } from "@/lib/profile";
 
 // Class names are spelled out in full so Tailwind can find them.
 const mobileSize: Record<CardSize, string> = {
@@ -7,8 +7,6 @@ const mobileSize: Record<CardSize, string> = {
   "2x1": "col-span-2 row-span-1",
   "1x2": "col-span-1 row-span-2",
   "2x2": "col-span-2 row-span-2",
-  // The mobile grid has two columns, so a full-width card is two wide.
-  "4x1": "col-span-2 row-span-1",
 };
 
 const desktopSize: Record<CardSize, string> = {
@@ -16,7 +14,6 @@ const desktopSize: Record<CardSize, string> = {
   "2x1": "xl:col-span-2 xl:row-span-1",
   "1x2": "xl:col-span-1 xl:row-span-2",
   "2x2": "xl:col-span-2 xl:row-span-2",
-  "4x1": "xl:col-span-4 xl:row-span-1",
 };
 
 const mobileOrder: Record<number, string> = {
@@ -33,7 +30,6 @@ const desktopWidth: Record<CardSize, number> = {
   "2x1": 398,
   "1x2": 187,
   "2x2": 398,
-  "4x1": 820,
 };
 
 function imageSizes(card: Card) {
@@ -46,7 +42,7 @@ const cardSurface =
   "relative h-full w-full overflow-hidden rounded-card border border-border bg-content text-fg shadow-card";
 
 /** Full-card link placed on top, so the whole tile is clickable. */
-function CardLink({ href, label }: { href: string; label: string }) {
+export function CardLink({ href, label }: { href: string; label: string }) {
   return (
     <a
       href={href}
@@ -130,76 +126,6 @@ function MapTile({ card }: { card: MapCard }) {
   );
 }
 
-function GithubMark() {
-  return (
-    <svg viewBox="0 0 16 16" aria-hidden="true" className="size-7 text-fg" fill="currentColor">
-      <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
-    </svg>
-  );
-}
-
-function Website({ card }: { card: WebsiteCard }) {
-  const tall = card.size === "2x2";
-  return (
-    <div className={`${cardSurface} flex flex-col justify-between p-4`}>
-      <div
-        className={`relative z-10 flex min-w-0 flex-col ${card.preview && !tall ? "max-w-[50%] xl:max-w-[calc(100%-330px)]" : ""}`}
-      >
-        <div className="flex size-10 items-center justify-center overflow-hidden rounded-xl bg-content">
-          {card.icon === "github" ? (
-            <GithubMark />
-          ) : (
-            card.icon && (
-              <Image
-                src={card.icon.src}
-              alt=""
-                width={40}
-                height={40}
-                className="size-full animate-reveal object-contain"
-                draggable={false}
-              />
-            )
-          )}
-        </div>
-        <div className="mt-3 flex flex-col">
-          <h3 className="line-clamp-1 text-sm font-medium text-fg" title={card.title}>
-            {card.title}
-          </h3>
-          <p className="line-clamp-1 text-xs text-muted-fg">{card.domain}</p>
-        </div>
-      </div>
-      {card.preview &&
-        (tall ? (
-          // Square tiles show the whole preview under the title.
-          <div className="relative z-10 mt-4 aspect-[1200/630] w-full overflow-hidden rounded-xl border border-border bg-muted">
-            <Image
-              src={card.preview.src}
-              alt={card.preview.alt}
-              fill
-              sizes="(min-width: 1280px) 366px, 350px"
-              className="animate-reveal object-cover"
-              draggable={false}
-            />
-          </div>
-        ) : (
-          // Short tiles keep the preview on the right, at its own proportions
-          // once the tile is wide enough.
-          <div className="absolute inset-y-4 right-4 z-10 w-[45%] overflow-hidden rounded-xl border border-border bg-muted xl:aspect-[1200/630] xl:w-auto">
-            <Image
-              src={card.preview.src}
-              alt={card.preview.alt}
-              fill
-              sizes="(min-width: 1280px) 300px, 160px"
-              className="animate-reveal object-cover"
-              draggable={false}
-            />
-          </div>
-        ))}
-      <CardLink href={card.href} label={card.label} />
-    </div>
-  );
-}
-
 export function BentoCard({ card }: { card: Card }) {
   return (
     <li
@@ -211,7 +137,6 @@ export function BentoCard({ card }: { card: Card }) {
     >
       {card.kind === "media" && <Media card={card} />}
       {card.kind === "map" && <MapTile card={card} />}
-      {card.kind === "website" && <Website card={card} />}
     </li>
   );
 }

@@ -1,4 +1,4 @@
-import { profile, sameAs, sections } from "@/lib/profile";
+import { profile, projectSections, sameAs } from "@/lib/profile";
 import { siteUrl } from "@/lib/site";
 
 const personId = `${siteUrl}/#person`;
@@ -49,17 +49,17 @@ const structuredData = {
     {
       "@type": "ItemList",
       "@id": `${siteUrl}/#projects`,
-      name: "Building & Products",
-      itemListElement: sections
-        .filter((s) => s.id !== "about")
-        .flatMap((s) => s.cards)
-        .map((card, index) => ({
+      name: "Building, products and writing",
+      itemListElement: projectSections
+        .flatMap((s) => s.projects)
+        .map((project, index) => ({
           "@type": "ListItem",
           position: index + 1,
           item: {
             "@type": "CreativeWork",
-            name: card.kind === "website" ? card.title : card.label,
-            url: card.href,
+            name: project.title,
+            description: project.description,
+            url: project.href,
             creator: { "@id": personId },
           },
         })),

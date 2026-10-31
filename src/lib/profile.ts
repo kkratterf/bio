@@ -4,7 +4,7 @@
  * one unit is one column of the 4-column desktop grid.
  */
 
-export type CardSize = "1x1" | "2x1" | "1x2" | "2x2" | "4x1";
+export type CardSize = "1x1" | "2x1" | "1x2" | "2x2";
 
 type BaseCard = {
   id: string;
@@ -31,15 +31,8 @@ export type MapCard = BaseCard & {
   image: { src: string; width: number; height: number };
 };
 
-export type WebsiteCard = BaseCard & {
-  kind: "website";
-  title: string;
-  domain: string;
-  icon?: { src: string; width: number; height: number } | "github";
-  preview?: { src: string; width: number; height: number; alt: string };
-};
 
-export type Card = MediaCard | MapCard | WebsiteCard;
+export type Card = MediaCard | MapCard;
 
 export type Post = {
   title: string;
@@ -48,10 +41,32 @@ export type Post = {
   href: string;
 };
 
-export type Section = {
+/** A product or a piece of writing, shown as a square card in a two-column grid. */
+export type Project = {
+  id: string;
+  href: string;
+  /** Accessible name for the whole card link. */
+  label: string;
+  title: string;
+  domain: string;
+  /** Shown as a badge next to the title. */
+  status: "Building" | "Live" | "Newsletter";
+  description: string;
+  icon: { src: string; width: number; height: number } | "github";
+  preview: { src: string; width: number; height: number; alt: string };
+};
+
+/** The bento grid of profiles at the top of the page. */
+export type BentoSection = {
   id: string;
   title: string;
   cards: Card[];
+};
+
+export type ProjectSection = {
+  id: string;
+  title: string;
+  projects: Project[];
   posts?: Post[];
 };
 
@@ -78,91 +93,93 @@ export const profile = {
   locale: "en_US",
 } as const;
 
-export const sections: Section[] = [
-  {
-    id: "about",
-    title: "About",
-    cards: [
-      {
-        kind: "map",
-        id: "location",
-        size: "1x2",
-        mobile: { size: "2x1", order: 2 },
-        place: "Milan, Italy",
-        href: "https://www.google.com/maps/search/?api=1&query=45.46426590913465%2C9.18814879103845",
-        label: "Milan, Italy on Google Maps",
-        image: { src: "/images/map-milan.png", width: 370, height: 792 },
+export const about: BentoSection = {
+  id: "about",
+  title: "About",
+  cards: [
+    {
+      kind: "map",
+      id: "location",
+      size: "1x2",
+      mobile: { size: "2x1", order: 2 },
+      place: "Milan, Italy",
+      href: "https://www.google.com/maps/search/?api=1&query=45.46426590913465%2C9.18814879103845",
+      label: "Milan, Italy on Google Maps",
+      image: { src: "/images/map-milan.png", width: 370, height: 792 },
+    },
+    {
+      kind: "media",
+      id: "linkedin",
+      size: "2x1",
+      mobile: { order: 1 },
+      href: "https://www.linkedin.com/in/kkratter/",
+      label: "Federico Kratter Thaler on LinkedIn",
+      image: {
+        src: "/images/linkedin.png",
+        width: 1170,
+        height: 525,
+        alt: "LinkedIn, @kkratter",
       },
-      {
-        kind: "media",
-        id: "linkedin",
-        size: "2x1",
-        mobile: { order: 1 },
-        href: "https://www.linkedin.com/in/kkratter/",
-        label: "Federico Kratter Thaler on LinkedIn",
-        image: {
-          src: "/images/linkedin.png",
-          width: 1170,
-          height: 525,
-          alt: "LinkedIn, @kkratter",
-        },
+    },
+    {
+      kind: "media",
+      id: "x",
+      size: "1x1",
+      mobile: { order: 4 },
+      href: "https://x.com/kkratter",
+      label: "Federico Kratter Thaler on X (Twitter)",
+      image: {
+        src: "/images/twitter.png",
+        width: 525,
+        height: 525,
+        alt: "Twitter, @kkratter",
       },
-      {
-        kind: "media",
-        id: "x",
-        size: "1x1",
-        mobile: { order: 4 },
-        href: "https://x.com/kkratter",
-        label: "Federico Kratter Thaler on X (Twitter)",
-        image: {
-          src: "/images/twitter.png",
-          width: 525,
-          height: 525,
-          alt: "Twitter, @kkratter",
-        },
+    },
+    {
+      kind: "media",
+      id: "github",
+      size: "1x1",
+      mobile: { order: 5 },
+      href: "https://github.com/kkratterf",
+      label: "Federico Kratter Thaler on GitHub",
+      image: {
+        src: "/images/github.png",
+        width: 525,
+        height: 525,
+        alt: "GitHub, @kkratterf",
       },
-      {
-        kind: "media",
-        id: "github",
-        size: "1x1",
-        mobile: { order: 5 },
-        href: "https://github.com/kkratterf",
-        label: "Federico Kratter Thaler on GitHub",
-        image: {
-          src: "/images/github.png",
-          width: 525,
-          height: 525,
-          alt: "GitHub, @kkratterf",
-        },
+    },
+    {
+      kind: "media",
+      id: "website",
+      size: "2x1",
+      mobile: { order: 3 },
+      href: "https://www.kkratter.com/",
+      label: "Portfolio 2023, kkratter.com",
+      image: {
+        src: "/images/portfolio.png",
+        width: 1170,
+        height: 525,
+        alt: "Portfolio 2023, Product & Design System Designer",
       },
-      {
-        kind: "media",
-        id: "website",
-        size: "2x1",
-        mobile: { order: 3 },
-        href: "https://www.kkratter.com/",
-        label: "Portfolio 2023, kkratter.com",
-        image: {
-          src: "/images/portfolio.png",
-          width: 1170,
-          height: 525,
-          alt: "Portfolio 2023, Product & Design System Designer",
-        },
-      },
-    ],
-  },
+    },
+  ],
+};
+
+export const projectSections: ProjectSection[] = [
   {
     id: "building",
     title: "Building",
-    cards: [
+    projects: [
       {
-        kind: "website",
         id: "play2match",
-        size: "2x2",
         href: "https://www.play2match.it/",
         label: "play2match",
         title: "play2match",
         domain: "play2match.it",
+        status: "Building",
+        description:
+          "Make new friends through sport. Mixed beach volley matches across Italy, with teams composed by level.",
         icon: { src: "/images/icons/play2match.png", width: 48, height: 48 },
         preview: {
           src: "/images/og/play2match.jpg",
@@ -172,13 +189,14 @@ export const sections: Section[] = [
         },
       },
       {
-        kind: "website",
         id: "m63",
-        size: "2x2",
         href: "https://m63.it/",
         label: "M63, the open map of the Italian startup ecosystem",
         title: "M63",
         domain: "m63.it",
+        status: "Building",
+        description:
+          "The open map of the Italian startup ecosystem: startups, investors, founders and funding rounds, plus a club for founders.",
         icon: { src: "/images/icons/m63.png", width: 192, height: 192 },
         preview: {
           src: "/images/og/m63.jpg",
@@ -192,15 +210,16 @@ export const sections: Section[] = [
   {
     id: "products",
     title: "Products",
-    cards: [
+    projects: [
       {
-        kind: "website",
         id: "maramao",
-        size: "2x2",
         href: "https://maramao.kkratter.com/",
         label: "Maramao, the Pomodoro timer that stops you with cats",
         title: "Maramao",
         domain: "maramao.kkratter.com",
+        status: "Live",
+        description:
+          "A Pomodoro timer for the macOS menu bar. Work for 25 minutes, then a cat makes sure you take the break.",
         icon: { src: "/images/icons/maramao.png", width: 180, height: 180 },
         preview: {
           src: "/images/og/maramao.jpg",
@@ -210,13 +229,14 @@ export const sections: Section[] = [
         },
       },
       {
-        kind: "website",
         id: "f4",
-        size: "2x2",
         href: "https://f4.kkratter.com/",
         label: "F4, Spotlight for your memes",
         title: "F4",
         domain: "f4.kkratter.com",
+        status: "Live",
+        description:
+          "Spotlight, but for your memes. Press F4, type a few letters and the meme is on your clipboard, GIFs included.",
         icon: { src: "/images/icons/f4.png", width: 180, height: 180 },
         preview: {
           src: "/images/og/f4.jpg",
@@ -226,14 +246,14 @@ export const sections: Section[] = [
         },
       },
       {
-        kind: "website",
         id: "fratmscript",
-        size: "4x1",
-        mobile: { size: "2x1" },
         href: "https://fratmscript.kkratter.com/",
-        label: "FratmScript",
+        label: "FratmScript, JavaScript ma comme si deve",
         title: "FratmScript",
         domain: "fratmscript.kkratter.com",
+        status: "Live",
+        description:
+          "JavaScript ma comme si deve. A transpiler, written in Rust, that turns Neapolitan code into JavaScript.",
         icon: "github",
         preview: {
           src: "/images/og/fratmscript.jpg",
@@ -247,16 +267,16 @@ export const sections: Section[] = [
   {
     id: "writing",
     title: "Writing",
-    cards: [
+    projects: [
       {
-        kind: "website",
         id: "substack",
-        size: "4x1",
-        mobile: { size: "2x1" },
         href: "https://kkratter.substack.com/",
         label: "Building. Always., the newsletter on Substack",
         title: "Building. Always.",
         domain: "kkratter.substack.com",
+        status: "Newsletter",
+        description:
+          "Notes from building products: what I ship, what breaks and what I learn along the way.",
         icon: { src: "/images/icons/substack.jpg", width: 64, height: 64 },
         preview: {
           src: "/images/substack.jpg",

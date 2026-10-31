@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { BentoCard } from "@/components/bento-card";
 import { JsonLd } from "@/components/json-ld";
-import { profile, sections } from "@/lib/profile";
+import { ProjectCard } from "@/components/project-card";
+import { about, profile, projectSections } from "@/lib/profile";
 
 export default function Home() {
   return (
@@ -32,21 +33,20 @@ export default function Home() {
         </header>
 
         <div className="mt-10 flex w-full max-w-[428px] flex-col gap-10 px-6 xl:mt-0 xl:gap-12 xl:w-[820px] xl:max-w-none xl:flex-none xl:px-0">
-          {sections.map((section) => (
-            <section
-              key={section.id}
-              className="bento-section"
-              aria-labelledby={`${section.id}-title`}
-            >
-              <h2
-                id={`${section.id}-title`}
-                className="px-1 text-lg leading-6 font-semibold tracking-[-0.01em] text-fg"
-              >
-                {section.title}
-              </h2>
-              <ul role="list" className="bento mt-3">
-                {section.cards.map((card) => (
-                  <BentoCard key={card.id} card={card} />
+          <section className="bento-section" aria-labelledby={`${about.id}-title`}>
+            <SectionTitle id={about.id}>{about.title}</SectionTitle>
+            <ul role="list" className="bento mt-3">
+              {about.cards.map((card) => (
+                <BentoCard key={card.id} card={card} />
+              ))}
+            </ul>
+          </section>
+          {projectSections.map((section) => (
+            <section key={section.id} aria-labelledby={`${section.id}-title`}>
+              <SectionTitle id={section.id}>{section.title}</SectionTitle>
+              <ul role="list" className="mt-3 grid grid-cols-1 gap-5 xl:grid-cols-2 xl:gap-6">
+                {section.projects.map((project) => (
+                  <ProjectCard key={project.id} project={project} />
                 ))}
               </ul>
               {section.posts && section.posts.length > 0 && (
@@ -80,5 +80,13 @@ export default function Home() {
         <p>© {profile.name}</p>
       </footer>
     </>
+  );
+}
+
+function SectionTitle({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <h2 id={`${id}-title`} className="px-1 text-lg leading-6 font-semibold tracking-[-0.01em] text-fg">
+      {children}
+    </h2>
   );
 }
