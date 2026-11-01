@@ -17,8 +17,6 @@ export function GET() {
 
 > ${profile.jobTitle}, based in ${profile.location.locality}, ${profile.location.country}. ${profile.bio}
 
-${profile.summary}
-
 - Website: ${siteUrl}
 - Handle: ${profile.handle}
 - Role: ${profile.worksFor.roleName} at [${profile.worksFor.name}](${profile.worksFor.url})

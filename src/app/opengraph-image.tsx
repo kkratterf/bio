@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { profile } from "@/lib/profile";
 
-export const alt = `${profile.name}: ${profile.roles.join(", ")}`;
+export const alt = `${profile.name} — ${profile.bio}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -50,9 +50,6 @@ export default async function OpengraphImage() {
         </div>
         <div style={{ marginTop: 16, fontSize: 40, color: "#686868" }}>
           {profile.bio}
-        </div>
-        <div style={{ marginTop: 28, fontSize: 28, color: "#8a8a8a" }}>
-          {profile.roles.join(" · ")}
         </div>
       </div>
     ),

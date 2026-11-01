@@ -60,12 +60,6 @@ export const profile = {
   /** Roles, in the order people search for them. Used in titles and JSON-LD. */
   roles: ["Builder", "CPTO", "Product Designer", "Product Engineer"],
   jobTitle: "Builder, CPTO, Product Designer & Product Engineer",
-  /** Visible intro under the bio: the main indexable copy of the page. */
-  summary:
-    "I'm a builder from Milan. As CPTO of play2match I lead product and technology, I design products end to end and I ship them myself as a product engineer: today play2match and M63, plus a few indie apps for macOS.",
-  /** Meta description: about 150 characters, roles and projects first. */
-  description:
-    "Federico Kratter Thaler (kkratter): builder, CPTO, product designer and product engineer in Milan. Building play2match and M63, shipping indie apps.",
   worksFor: {
     name: "play2match",
     url: "https://www.play2match.it/",

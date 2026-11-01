@@ -45,8 +45,9 @@ Vercel at https://kkratter.com. Read `README.md` first.
   domain.
 - Bump `lastUpdated` in `src/lib/site.ts` when content changes (sitemap and
   JSON-LD `dateModified`).
-- Title stays about 60 characters, meta description about 150; both are built
-  from `profile.roles` and `profile.description`.
+- The title is just the name and the meta description is the bio
+  (`profile.bio`). Do not add roles to them, extra copy to the page or text to
+  the OG image unless the owner asks.
 - Each project needs a `schemaType` (WebApplication, SoftwareApplication,
   WebSite or Blog) so its JSON-LD node is typed correctly.
 - `/llms.txt` is generated from `profile.ts`; check it after content changes.

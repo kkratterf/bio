@@ -20,15 +20,14 @@ const mattone = localFont({
   display: "swap",
 });
 
-// About 60 characters: name first, then the roles people search for.
-const title = `${profile.name} · Builder, CPTO & Product Designer`;
-const description = profile.description;
+const title = profile.name;
+const description = profile.bio;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: title,
-    template: `%s · ${profile.name}`,
+    template: `%s · ${title}`,
   },
   description,
   applicationName: title,
