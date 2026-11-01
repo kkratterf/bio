@@ -297,3 +297,10 @@ export const sameAs = [
   "https://www.instagram.com/kkratter/",
   "https://avely.me/kkratter",
 ];
+
+/** Visit counter in the bottom-left corner (count from PostHog, see src/lib/visitors.ts). */
+export const visitorCounter = {
+  label: "visitor number:",
+  /** The count is zero-padded to this many digits, like an old hit counter. */
+  digits: 6,
+};
