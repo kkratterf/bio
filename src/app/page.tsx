@@ -2,6 +2,7 @@ import Image from "next/image";
 import { JsonLd } from "@/components/json-ld";
 import { ProjectCard } from "@/components/project-card";
 import { SocialCard } from "@/components/social-card";
+import { VisitorCounter } from "@/components/visitor-counter";
 import { profile, projectSections, socials } from "@/lib/profile";
 
 const grid = "mt-3 grid grid-cols-1 gap-5 xl:grid-cols-2 xl:gap-6";
@@ -78,6 +79,7 @@ export default function Home() {
           ))}
         </div>
       </main>
+      <VisitorCounter />
       <footer data-reveal className="mb-10 flex w-full justify-center text-xs text-muted-fg">
         <p>© {profile.name}</p>
       </footer>
