@@ -3,11 +3,9 @@
 // stay out of the stats). The SDK is loaded lazily so it never delays the
 // first paint or hydration.
 //
-// Cookieless mode: no cookies, localStorage or sessionStorage, so no consent
-// banner is needed. Unique visitors are counted with a privacy-preserving
-// hash on PostHog's servers, which must be enabled in the PostHog project
-// (Settings → Web analytics → Cookieless tracking), otherwise events are
-// dropped.
+// No cookies: `persistence: "memory"` keeps the anonymous id in memory only
+// (no cookies, no localStorage), so no consent banner is needed. Same PostHog
+// project and settings as f4, maramao, fratmscript and portfolio.kkratter.com.
 const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 
 if (key) {
@@ -19,7 +17,8 @@ if (key) {
         api_host: "/ingest",
         ui_host: process.env.NEXT_PUBLIC_POSTHOG_UI_HOST ?? "https://eu.posthog.com",
         defaults: "2026-08-30",
-        cookieless_mode: "always",
+        persistence: "memory",
+        disable_session_recording: true,
         person_profiles: "identified_only",
       });
     })

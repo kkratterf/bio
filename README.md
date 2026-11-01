@@ -79,9 +79,8 @@ PostHog (EU cloud) counts visits, pageviews and outbound clicks. It loads from
 previews and local dev are not tracked. Events go through a same-origin proxy
 (`/ingest`, rewrites in `next.config.ts`) so ad blockers don't drop them.
 
-It runs in cookieless mode: no cookies or storage, no consent banner. This
-needs **Cookieless tracking** turned on in the PostHog project settings,
-otherwise PostHog drops the events. For a US project also set
+It keeps the anonymous id in memory only (`persistence: "memory"`): no
+cookies or storage, no consent banner. For a US project also set
 `NEXT_PUBLIC_POSTHOG_HOST` and `NEXT_PUBLIC_POSTHOG_UI_HOST` (see
 `.env.example`).
 
