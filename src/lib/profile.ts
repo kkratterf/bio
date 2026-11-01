@@ -300,7 +300,7 @@ export const sameAs = [
 
 /** Visit counter in the bottom-left corner (count from PostHog, see src/lib/visitors.ts). */
 export const visitorCounter = {
-  label: "Visitor number",
+  label: "visitor number:",
   /** The count is zero-padded to this many digits, like an old hit counter. */
   digits: 6,
 };

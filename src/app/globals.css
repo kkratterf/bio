@@ -103,3 +103,31 @@ body {
     transition: none !important;
   }
 }
+
+/*
+ * Visitor counter odometer: each digit is a 0-9 column clipped to one line,
+ * shifted to its value. Once the counter is revealed the columns roll up from
+ * 0, staggered left to right. Without JS or with reduced motion the final
+ * number is shown as is.
+ */
+.digit-roll {
+  display: inline-block;
+  height: 1lh;
+  overflow: hidden;
+}
+
+.digit-roll > span {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(calc(var(--digit) * -10%));
+}
+
+[data-revealed] .digit-roll > span {
+  animation: digit-roll 1400ms cubic-bezier(0.16, 1, 0.3, 1) calc(var(--reveal-delay, 0ms) + 200ms + var(--roll-delay, 0ms)) backwards;
+}
+
+@keyframes digit-roll {
+  from {
+    transform: translateY(0);
+  }
+}
