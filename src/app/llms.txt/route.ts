@@ -8,6 +8,11 @@ export function GET() {
     .map((section) => {
       const items = section.projects
         .map((p) => `- [${p.title}](${p.href}): ${p.description} (${p.status})`)
+        .concat(
+          (section.companies ?? []).map(
+            (c) => `- [${c.name}](${c.website}): ${c.role}, ${c.years}. ${c.description}`,
+          ),
+        )
         .join("\n");
       return `## ${section.title}\n\n${items}`;
     })

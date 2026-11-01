@@ -44,10 +44,33 @@ export type Project = {
   preview: { src: string; width: number; height: number; alt: string };
 };
 
+/**
+ * A company I worked at, shown in Archive as a square card that links to its
+ * LinkedIn page. The role goes in the subtitle and the years in the badge.
+ */
+export type Company = {
+  id: string;
+  name: string;
+  /** The company's LinkedIn page; the card links here. */
+  href: string;
+  /** The company's own website, for JSON-LD and llms.txt. */
+  website: string;
+  role: string;
+  /** Shown in the badge, e.g. "2023–25". */
+  years: string;
+  /** ISO dates of the role, for JSON-LD. */
+  startDate: string;
+  endDate: string;
+  description: string;
+  icon: { src: string; width: number; height: number };
+  preview: { src: string; width: number; height: number; alt: string };
+};
+
 export type ProjectSection = {
   id: string;
   title: string;
   projects: Project[];
+  companies?: Company[];
   posts?: Post[];
 };
 
@@ -282,6 +305,47 @@ export const projectSections: ProjectSection[] = [
           width: 1200,
           height: 630,
           alt: "Federico Kratter Thaler, portfolio cover",
+        },
+      },
+    ],
+    // Companies I worked at, oldest first.
+    companies: [
+      {
+        id: "octostar",
+        name: "Octostar",
+        href: "https://www.linkedin.com/company/octostar/",
+        website: "https://www.octostar.com/",
+        role: "Founding Product Designer",
+        years: "2023–25",
+        startDate: "2023-01",
+        endDate: "2025-04",
+        description:
+          "First hire. Investigative and decision intelligence software for police, intelligence agencies and banks.",
+        icon: { src: "/images/icons/octostar.png", width: 180, height: 180 },
+        preview: {
+          src: "/images/og/octostar.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Octostar: intelligence software for national security, law enforcement and financial institutions",
+        },
+      },
+      {
+        id: "bricks",
+        name: "bricks.sh",
+        href: "https://www.linkedin.com/company/brickssh/",
+        website: "https://www.bricks.sh/",
+        role: "Founding Product Designer",
+        years: "2025–26",
+        startDate: "2025-05",
+        endDate: "2026-04",
+        description:
+          "First hire. A dev tool that turns internal APIs into admin panels, so startups ship internal tools in minutes.",
+        icon: { src: "/images/icons/bricks.png", width: 180, height: 180 },
+        preview: {
+          src: "/images/og/bricks.jpg",
+          width: 1200,
+          height: 630,
+          alt: "bricks.sh: the agentic layer for customer success",
         },
       },
     ],
