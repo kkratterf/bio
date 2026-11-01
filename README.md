@@ -66,10 +66,23 @@ touch icons of each app). Card layout is in
 | Variable               | Where                 | Value                  |
 | ---------------------- | --------------------- | ---------------------- |
 | `NEXT_PUBLIC_SITE_URL` | Vercel, Production    | `https://kkratter.com` |
+| `NEXT_PUBLIC_POSTHOG_KEY` | Vercel, Production | PostHog project API key (`phc_...`) |
 
 It drives canonical URLs, OG tags, sitemap, robots and JSON-LD. When it is
 missing, Vercel's production domain is used, then `http://localhost:3000`.
 Preview deployments can leave it unset.
+
+## Analytics
+
+PostHog (EU cloud) counts visits, pageviews and outbound clicks. It loads from
+`src/instrumentation-client.ts` only when `NEXT_PUBLIC_POSTHOG_KEY` is set, so
+previews and local dev are not tracked. Events go through a same-origin proxy
+(`/ingest`, rewrites in `next.config.ts`) so ad blockers don't drop them.
+
+It keeps the anonymous id in memory only (`persistence: "memory"`): no
+cookies or storage, no consent banner. For a US project also set
+`NEXT_PUBLIC_POSTHOG_HOST` and `NEXT_PUBLIC_POSTHOG_UI_HOST` (see
+`.env.example`).
 
 ## Deploy
 
