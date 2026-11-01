@@ -54,7 +54,7 @@ export default function Home() {
               {section.posts && section.posts.length > 0 && (
                 <ol role="list" className="mt-3 flex flex-col">
                   {section.posts.map((post) => (
-                    <li key={post.href}>
+                    <li key={post.href} data-reveal>
                       <a
                         href={post.href}
                         target="_blank"
@@ -78,7 +78,7 @@ export default function Home() {
           ))}
         </div>
       </main>
-      <footer className="mb-10 flex w-full justify-center text-xs text-muted-fg">
+      <footer data-reveal className="mb-10 flex w-full justify-center text-xs text-muted-fg">
         <p>© {profile.name}</p>
       </footer>
     </>
@@ -87,7 +87,7 @@ export default function Home() {
 
 function SectionTitle({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <h2 id={`${id}-title`} className="px-1 text-lg leading-6 font-semibold tracking-[-0.01em] text-fg">
+    <h2 id={`${id}-title`} data-reveal className="px-1 text-lg leading-6 font-semibold tracking-[-0.01em] text-fg">
       {children}
     </h2>
   );

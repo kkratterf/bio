@@ -24,7 +24,7 @@ export function FrameCard({
   preview: ReactNode;
 }) {
   return (
-    <li>
+    <li data-reveal>
       <article className="group relative flex aspect-square flex-col rounded-[1.25rem] bg-black/[0.035] p-1 transition-colors hover:bg-black/[0.055]">
         <header className="flex min-w-0 items-center gap-3 px-3 pt-2.5 pb-3.5">
           {icon}
