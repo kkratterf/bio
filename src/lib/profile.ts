@@ -1,50 +1,54 @@
 /**
  * Every piece of content shown on the page lives here, so the bio can be
- * edited without touching layout code. Grid sizes mirror the Avely bento grid:
- * one unit is one column of the 4-column desktop grid.
+ * edited without touching layout code.
  */
 
-export type CardSize = "1x1" | "2x1" | "1x2" | "2x2";
+import type { Brand } from "@/components/brand-icon";
 
-type BaseCard = {
+/** A social profile, shown as a compact square in the four-column About row. */
+export type Social = {
   id: string;
-  /** Size on the 4-column desktop grid. */
-  size: CardSize;
-  /**
-   * Avely keeps a separate 2-column layout for small screens: a card can take
-   * another shape there and appear in another position.
-   */
-  mobile?: { size?: CardSize; order?: number };
+  brand: Brand;
   href: string;
-  /** Accessible name for the whole card link. */
+  /** Accessible name of the card link, e.g. "Federico Kratter Thaler on LinkedIn". */
   label: string;
+  title: string;
+  handle: string;
+  /** CSS background for the brand panel. */
+  background: string;
 };
 
-export type MediaCard = BaseCard & {
-  kind: "media";
-  image: { src: string; width: number; height: number; alt: string };
+export type Post = {
+  title: string;
+  /** ISO date, e.g. "2026-10-01". */
+  date: string;
+  href: string;
 };
 
-export type MapCard = BaseCard & {
-  kind: "map";
-  place: string;
-  image: { src: string; width: number; height: number };
-};
-
-export type WebsiteCard = BaseCard & {
-  kind: "website";
+/** A product or a piece of writing, shown as a square card in a two-column grid. */
+export type Project = {
+  id: string;
+  href: string;
   title: string;
   domain: string;
-  icon?: { src: string; width: number; height: number } | "github";
-  preview?: { src: string; width: number; height: number; alt: string };
+  /** Shown as a badge next to the title. */
+  status: "Building" | "Live" | "Newsletter" | "Archived";
+  /** schema.org type used for the project in JSON-LD. */
+  schemaType: "WebApplication" | "SoftwareApplication" | "WebSite" | "Blog";
+  /** For SoftwareApplication: e.g. "macOS". */
+  operatingSystem?: string;
+  /** For SoftwareApplication: schema.org applicationCategory. */
+  applicationCategory?: string;
+  description: string;
+  icon: { src: string; width: number; height: number } | "github";
+  preview: { src: string; width: number; height: number; alt: string };
 };
 
-export type Card = MediaCard | MapCard | WebsiteCard;
-
-export type Section = {
+export type ProjectSection = {
   id: string;
   title: string;
-  cards: Card[];
+  projects: Project[];
+  posts?: Post[];
 };
 
 export const profile = {
@@ -53,7 +57,27 @@ export const profile = {
   familyName: "Kratter Thaler",
   handle: "kkratter",
   bio: "I design products. I build them too.",
-  jobTitle: "Product designer & builder",
+  /** Roles, in the order people search for them. Used in titles and JSON-LD. */
+  roles: ["Builder", "CPTO", "Product Designer", "Product Engineer"],
+  jobTitle: "Builder, CPTO, Product Designer & Product Engineer",
+  worksFor: {
+    name: "play2match",
+    url: "https://www.play2match.it/",
+    roleName: "CPTO",
+  },
+  knowsAbout: [
+    "Product design",
+    "Product engineering",
+    "Product management",
+    "Design systems",
+    "UX design",
+    "Startups",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Rust",
+    "macOS apps",
+  ],
   location: {
     locality: "Milan",
     country: "Italy",
@@ -70,102 +94,163 @@ export const profile = {
   locale: "en_US",
 } as const;
 
-export const sections: Section[] = [
+export const socials: Social[] = [
   {
-    id: "about",
-    title: "About",
-    cards: [
+    id: "linkedin",
+    brand: "linkedin",
+    href: "https://www.linkedin.com/in/kkratter/",
+    label: "Federico Kratter Thaler on LinkedIn",
+    title: "LinkedIn",
+    handle: "@kkratter",
+    background: "linear-gradient(135deg, #0a66c2 0%, #004182 100%)",
+  },
+  {
+    id: "github",
+    brand: "github",
+    href: "https://github.com/kkratterf",
+    label: "Federico Kratter Thaler on GitHub",
+    title: "GitHub",
+    handle: "@kkratterf",
+    background: "linear-gradient(135deg, #2b3137 0%, #0d1117 100%)",
+  },
+  {
+    id: "x",
+    brand: "x",
+    href: "https://x.com/kkratter",
+    label: "Federico Kratter Thaler on X (Twitter)",
+    title: "X",
+    handle: "@kkratter",
+    background: "linear-gradient(135deg, #2a2a2a 0%, #000000 100%)",
+  },
+  {
+    id: "instagram",
+    brand: "instagram",
+    href: "https://www.instagram.com/kkratter/",
+    label: "Federico Kratter Thaler on Instagram",
+    title: "Instagram",
+    handle: "@kkratter",
+    background:
+      "radial-gradient(circle at 20% 110%, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%)",
+  },
+];
+
+export const projectSections: ProjectSection[] = [
+  {
+    id: "building",
+    title: "Building",
+    projects: [
       {
-        kind: "map",
-        id: "location",
-        size: "1x2",
-        mobile: { size: "2x1", order: 2 },
-        place: "Milan, Italy",
-        href: "https://www.google.com/maps/search/?api=1&query=45.46426590913465%2C9.18814879103845",
-        label: "Milan, Italy on Google Maps",
-        image: { src: "/images/map-milan.png", width: 370, height: 792 },
-      },
-      {
-        kind: "media",
-        id: "linkedin",
-        size: "2x1",
-        mobile: { order: 1 },
-        href: "https://www.linkedin.com/in/kkratter/",
-        label: "Federico Kratter Thaler on LinkedIn",
-        image: {
-          src: "/images/linkedin.png",
-          width: 1170,
-          height: 525,
-          alt: "LinkedIn, @kkratter",
+        id: "play2match",
+        schemaType: "WebApplication",
+        applicationCategory: "SportsApplication",
+        href: "https://www.play2match.it/",
+        title: "play2match",
+        domain: "play2match.it",
+        status: "Building",
+        description:
+          "Make new friends through sport. Mixed beach volley matches across Italy, with teams composed by level.",
+        icon: { src: "/images/icons/play2match.png", width: 180, height: 180 },
+        preview: {
+          src: "/images/og/play2match.jpg",
+          width: 1200,
+          height: 630,
+          alt: "play2match: Fai nuove amicizie attraverso lo sport",
         },
       },
       {
-        kind: "media",
-        id: "x",
-        size: "1x1",
-        mobile: { order: 4 },
-        href: "https://x.com/kkratter",
-        label: "Federico Kratter Thaler on X (Twitter)",
-        image: {
-          src: "/images/twitter.png",
-          width: 525,
-          height: 525,
-          alt: "Twitter, @kkratter",
-        },
-      },
-      {
-        kind: "media",
-        id: "github",
-        size: "1x1",
-        mobile: { order: 5 },
-        href: "https://github.com/kkratterf",
-        label: "Federico Kratter Thaler on GitHub",
-        image: {
-          src: "/images/github.png",
-          width: 525,
-          height: 525,
-          alt: "GitHub, @kkratterf",
-        },
-      },
-      {
-        kind: "media",
-        id: "website",
-        size: "2x1",
-        mobile: { order: 3 },
-        href: "https://www.kkratter.com/",
-        label: "Portfolio 2023, kkratter.com",
-        image: {
-          src: "/images/portfolio.png",
-          width: 1170,
-          height: 525,
-          alt: "Portfolio 2023, Product & Design System Designer",
+        id: "m63",
+        schemaType: "WebSite",
+        href: "https://m63.it/",
+        title: "M63",
+        domain: "m63.it",
+        status: "Building",
+        description:
+          "The open map of the Italian startup ecosystem: startups, investors, founders and funding rounds, plus a club for founders.",
+        icon: { src: "/images/icons/m63.png", width: 180, height: 180 },
+        preview: {
+          src: "/images/og/m63.jpg",
+          width: 1200,
+          height: 630,
+          alt: "M63: Scopri le migliori startup italiane",
         },
       },
     ],
   },
   {
-    id: "building",
-    title: "Building",
-    cards: [
+    id: "products",
+    title: "Products",
+    projects: [
       {
-        kind: "website",
-        id: "play2match",
-        size: "2x2",
-        href: "https://www.play2match.it/",
-        label: "play2match",
-        title: "play2match",
-        domain: "play2match.it",
-        icon: { src: "/images/icons/play2match.png", width: 48, height: 48 },
+        id: "maramao",
+        schemaType: "SoftwareApplication",
+        operatingSystem: "macOS",
+        applicationCategory: "ProductivityApplication",
+        href: "https://maramao.kkratter.com/",
+        title: "Maramao",
+        domain: "maramao.kkratter.com",
+        status: "Live",
+        description:
+          "A Pomodoro timer for the macOS menu bar. Work for 25 minutes, then a cat makes sure you take the break.",
+        icon: { src: "/images/icons/maramao.png", width: 180, height: 180 },
+        preview: {
+          src: "/images/og/maramao.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Maramao: Work for 25 minutes. Then the cat takes over.",
+        },
       },
       {
-        kind: "website",
+        id: "f4",
+        schemaType: "SoftwareApplication",
+        operatingSystem: "macOS",
+        applicationCategory: "UtilitiesApplication",
+        href: "https://f4.kkratter.com/",
+        title: "F4",
+        domain: "f4.kkratter.com",
+        status: "Live",
+        description:
+          "Spotlight, but for your memes. Press F4, type a few letters and the meme is on your clipboard, GIFs included.",
+        icon: { src: "/images/icons/f4.png", width: 180, height: 180 },
+        preview: {
+          src: "/images/og/f4.jpg",
+          width: 1200,
+          height: 630,
+          alt: "F4: Your shortcut to every meme.",
+        },
+      },
+      {
+        id: "fratmscript",
+        schemaType: "SoftwareApplication",
+        applicationCategory: "DeveloperApplication",
+        href: "https://fratmscript.kkratter.com/",
+        title: "FratmScript",
+        domain: "fratmscript.kkratter.com",
+        status: "Live",
+        description:
+          "JavaScript ma comme si deve. A transpiler, written in Rust, that turns Neapolitan code into JavaScript.",
+        icon: "github",
+        preview: {
+          src: "/images/og/fratmscript.jpg",
+          width: 1200,
+          height: 630,
+          alt: "FratmScript: JavaScript ma comme si deve",
+        },
+      },
+    ],
+  },
+  {
+    id: "writing",
+    title: "Writing",
+    projects: [
+      {
         id: "substack",
-        size: "2x2",
-        mobile: { size: "2x1" },
+        schemaType: "Blog",
         href: "https://kkratter.substack.com/",
-        label: "Building. Always. on Substack",
         title: "Building. Always.",
         domain: "kkratter.substack.com",
+        status: "Newsletter",
+        description:
+          "Notes from building products: what I ship, what breaks and what I learn along the way.",
         icon: { src: "/images/icons/substack.jpg", width: 64, height: 64 },
         preview: {
           src: "/images/substack.jpg",
@@ -175,41 +260,29 @@ export const sections: Section[] = [
         },
       },
     ],
+    // Latest issues, newest first; listed under the newsletter card.
+    posts: [],
   },
   {
-    id: "products",
-    title: "Products",
-    cards: [
+    id: "archive",
+    title: "Archive",
+    projects: [
       {
-        kind: "website",
-        id: "c14",
-        size: "2x2",
-        href: "https://www.c14.so/",
-        label: "C14, open-source startup database",
-        title: "C14 — Open-source startup database",
-        domain: "c14.so",
-        icon: { src: "/images/icons/c14.png", width: 48, height: 48 },
-      },
-      {
-        kind: "website",
-        id: "m63",
-        size: "2x2",
-        href: "https://www.m63.club/",
-        label: "M63 Club",
-        title: "M63 Club — Keep the secret",
-        domain: "m63.club",
-        icon: { src: "/images/icons/m63.png", width: 48, height: 48 },
-      },
-      {
-        kind: "website",
-        id: "fratmscript",
-        size: "2x2",
-        mobile: { size: "2x1" },
-        href: "https://kkratterf.github.io/fratmscript/",
-        label: "FratmScript",
-        title: "FratmScript - JavaScript ma comme si deve 🤌",
-        domain: "kkratterf.github.io",
-        icon: "github",
+        id: "portfolio",
+        schemaType: "WebSite",
+        href: "https://portfolio.kkratter.com/",
+        title: "Portfolio",
+        domain: "portfolio.kkratter.com",
+        status: "Archived",
+        description:
+          "My previous portfolio, from before 2023: product and design system work, before I started shipping my own products.",
+        icon: { src: "/images/icons/portfolio.png", width: 180, height: 180 },
+        preview: {
+          src: "/images/og/portfolio.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Federico Kratter Thaler, portfolio cover",
+        },
       },
     ],
   },
@@ -220,7 +293,7 @@ export const sameAs = [
   "https://www.linkedin.com/in/kkratter/",
   "https://x.com/kkratter",
   "https://github.com/kkratterf",
-  "https://www.kkratter.com/",
   "https://kkratter.substack.com/",
+  "https://www.instagram.com/kkratter/",
   "https://avely.me/kkratter",
 ];

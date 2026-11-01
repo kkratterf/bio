@@ -1,6 +1,6 @@
 /**
  * Canonical origin of the deployed site. Set NEXT_PUBLIC_SITE_URL in
- * production (e.g. https://bio.kkratter.com); on Vercel the production
+ * production (https://kkratter.com); on Vercel the production
  * domain is used automatically when the variable is missing.
  */
 function resolveSiteUrl(): string {
@@ -14,3 +14,9 @@ function resolveSiteUrl(): string {
 }
 
 export const siteUrl = resolveSiteUrl();
+
+/**
+ * Last meaningful content update, for sitemap.xml and the ProfilePage
+ * dateModified. Bump it when profile.ts changes.
+ */
+export const lastUpdated = "2026-10-31";
