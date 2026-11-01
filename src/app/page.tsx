@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CompanyCard } from "@/components/company-card";
 import { JsonLd } from "@/components/json-ld";
 import { ProjectCard } from "@/components/project-card";
 import { SocialCard } from "@/components/social-card";
@@ -50,6 +51,9 @@ export default function Home() {
               <ul role="list" className={grid}>
                 {section.projects.map((project) => (
                   <ProjectCard key={project.id} project={project} />
+                ))}
+                {section.companies?.map((company) => (
+                  <CompanyCard key={company.id} company={company} />
                 ))}
               </ul>
               {section.posts && section.posts.length > 0 && (

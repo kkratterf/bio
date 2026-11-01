@@ -15,7 +15,7 @@ const statusDot: Record<Project["status"], string> = {
 // light, in their own colour; the others stay still.
 const pinging: ReadonlySet<Project["status"]> = new Set(["Live", "Building"]);
 
-function StatusDot({ status }: { status: Project["status"] }) {
+export function StatusDot({ status }: { status: Project["status"] }) {
   return (
     <span aria-hidden="true" className="relative flex size-1.5">
       {pinging.has(status) && (
