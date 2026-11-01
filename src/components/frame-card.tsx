@@ -47,9 +47,9 @@ export function FrameCard({
             {badge}
           </span>
         </header>
-        <div className="relative flex min-h-0 flex-1 flex-col gap-4 rounded-2xl border border-border bg-content bg-clip-padding p-4 shadow-card before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(1rem-1px)] before:shadow-panel-edge xl:p-5">
+        <div className="relative flex min-h-0 flex-1 flex-col gap-5 rounded-2xl border border-border bg-content bg-clip-padding p-4 shadow-card before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(1rem-1px)] before:shadow-panel-edge xl:gap-6 xl:p-5">
           <p className="line-clamp-3 text-sm leading-6 text-muted-fg">{description}</p>
-          <div className="relative mt-auto aspect-[1200/630] w-full shrink-0 overflow-hidden rounded-xl border border-border bg-muted">
+          <div className="relative min-h-0 w-full flex-1 overflow-hidden rounded-xl border border-border bg-muted">
             {preview}
           </div>
         </div>
