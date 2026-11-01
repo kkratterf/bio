@@ -14,7 +14,7 @@ if(!("IntersectionObserver" in window)||matchMedia("(prefers-reduced-motion: red
 d.classList.add("reveal");
 var first=true;
 var io=new IntersectionObserver(function(entries){
-var i=0,base=first?300:0;first=false;
+var i=0,base=first?420:0;first=false;
 entries.forEach(function(e){
 if(!e.isIntersecting)return;
 var el=e.target;
