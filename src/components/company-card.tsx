@@ -1,18 +1,18 @@
 import Image from "next/image";
 import { FrameCard } from "@/components/frame-card";
+import { StatusDot } from "@/components/project-card";
 import type { Company } from "@/lib/profile";
 
 /**
- * A past company in the same Frame as the project cards: the role sits under
- * the name, the years take the place of the status badge, and the card links
- * to the company's LinkedIn page.
+ * A past company, drawn exactly like an archived project card (domain under
+ * the name, Archived badge); the card links to the company's LinkedIn page.
  */
 export function CompanyCard({ company }: { company: Company }) {
   return (
     <FrameCard
       href={company.href}
       title={company.name}
-      subtitle={company.role}
+      subtitle={company.domain}
       description={company.description}
       icon={
         <div className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-[10px] border border-border bg-content shadow-card">
@@ -26,7 +26,12 @@ export function CompanyCard({ company }: { company: Company }) {
           />
         </div>
       }
-      badge={<span className="tabular-nums">{company.years}</span>}
+      badge={
+        <>
+          <StatusDot status="Archived" />
+          Archived
+        </>
+      }
       preview={
         <Image
           src={company.preview.src}

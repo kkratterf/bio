@@ -45,8 +45,8 @@ export type Project = {
 };
 
 /**
- * A company I worked at, shown in Archive as a square card that links to its
- * LinkedIn page. The role goes in the subtitle and the years in the badge.
+ * A company I worked at, shown in Archive like the other archived cards
+ * (domain as subtitle, Archived badge), but the card opens its LinkedIn page.
  */
 export type Company = {
   id: string;
@@ -55,8 +55,10 @@ export type Company = {
   href: string;
   /** The company's own website, for JSON-LD and llms.txt. */
   website: string;
+  /** Shown under the name, e.g. "octostar.com". */
+  domain: string;
   role: string;
-  /** Shown in the badge, e.g. "2023–25". */
+  /** e.g. "2023–25", for llms.txt. */
   years: string;
   /** ISO dates of the role, for JSON-LD. */
   startDate: string;
@@ -315,6 +317,7 @@ export const projectSections: ProjectSection[] = [
         name: "Octostar",
         href: "https://www.linkedin.com/company/octostar/",
         website: "https://www.octostar.com/",
+        domain: "octostar.com",
         role: "Founding Product Designer",
         years: "2023–25",
         startDate: "2023-01",
@@ -334,6 +337,7 @@ export const projectSections: ProjectSection[] = [
         name: "bricks.sh",
         href: "https://www.linkedin.com/company/brickssh/",
         website: "https://www.bricks.sh/",
+        domain: "bricks.sh",
         role: "Founding Product Designer",
         years: "2025–26",
         startDate: "2025-05",

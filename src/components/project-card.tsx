@@ -19,7 +19,7 @@ const statusMotion: Partial<Record<Project["status"], "ping" | "pulse">> = {
   Building: "pulse",
 };
 
-function StatusDot({ status }: { status: Project["status"] }) {
+export function StatusDot({ status }: { status: Project["status"] }) {
   const motion = statusMotion[status];
   return (
     <span aria-hidden="true" className="relative flex size-1.5">
