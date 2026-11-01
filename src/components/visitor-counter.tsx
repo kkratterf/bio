@@ -4,8 +4,8 @@ import { getVisitorCount } from "@/lib/visitors";
 /**
  * "visitor number: 000123" in a mono face. Pinned to the bottom-left corner
  * on desktop (under the sticky profile), at the end of the page on mobile.
- * It rises in like every other block, and each digit rolls up to its value
- * like an odometer (see .digit-roll in globals.css). Renders nothing when the
+ * It fades in showing zeros, then each non-zero digit spins to its value,
+ * left to right (see .visitor-counter in globals.css). Renders nothing when the
  * count is not available.
  */
 export async function VisitorCounter() {
@@ -17,20 +17,27 @@ export async function VisitorCounter() {
   return (
     <p
       data-reveal
-      className="mx-auto mt-2 mb-10 flex w-full max-w-[428px] items-baseline gap-2 px-7 font-mono text-xs text-muted-fg xl:fixed xl:bottom-16 xl:left-[max(4.5rem,calc((100vw-1728px)/2+4.5rem))] xl:m-0 xl:w-auto xl:max-w-none xl:px-0"
+      className="visitor-counter mx-auto mt-2 mb-10 flex w-full max-w-[428px] items-baseline gap-2 px-7 font-mono text-xs text-muted-fg xl:fixed xl:bottom-8 xl:left-[max(4.5rem,calc((100vw-1728px)/2+4.5rem))] xl:m-0 xl:w-auto xl:max-w-none xl:px-0"
     >
       <span>{visitorCounter.label}</span>
       <span className="sr-only">{count}</span>
       <span aria-hidden="true" className="flex text-fg tabular-nums">
-        {digits.map((digit, i) => (
-          <span key={i} className="digit-roll">
-            <span style={{ "--digit": Number(digit), "--roll-delay": `${i * 70}ms` } as React.CSSProperties}>
-              {"0123456789".split("").map((d) => (
-                <span key={d}>{d}</span>
-              ))}
+        {digits.map((digit, i) => {
+          // Zeros stay still; the other digits spin in turn, left to right.
+          const order = digits.slice(0, i).filter((d) => d !== "0").length;
+          return (
+            <span key={i} className="digit-roll">
+              <span
+                data-still={digit === "0" || undefined}
+                style={{ "--digit": Number(digit), "--roll-delay": `${order * 180}ms` } as React.CSSProperties}
+              >
+                {"01234567890123456789".split("").map((d, j) => (
+                  <span key={j}>{d}</span>
+                ))}
+              </span>
             </span>
-          </span>
-        ))}
+          );
+        })}
       </span>
     </p>
   );

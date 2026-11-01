@@ -131,11 +131,22 @@ body {
 }
 
 /*
- * Visitor counter odometer: each digit is a 0-9 column clipped to one line,
- * shifted to its value. Once the counter is revealed the columns roll up from
- * 0, staggered left to right. Without JS or with reduced motion the final
- * number is shown as is.
+ * Visitor counter: it only fades in where it sits (no rise), showing all
+ * zeros. Then each non-zero digit spins one full turn and stops on its value, starting
+ * from the leftmost digit and moving right. Each digit is a 0-9-0-9 column
+ * clipped to one line. Without JS or with reduced motion the final number is
+ * shown as is.
  */
+[data-revealed].visitor-counter {
+  animation-name: counter-fade;
+}
+
+@keyframes counter-fade {
+  from {
+    opacity: 0;
+  }
+}
+
 .digit-roll {
   display: inline-block;
   height: 1lh;
@@ -145,11 +156,12 @@ body {
 .digit-roll > span {
   display: flex;
   flex-direction: column;
-  transform: translateY(calc(var(--digit) * -10%));
+  /* 20 rows: a full turn (10) plus the digit. */
+  transform: translateY(calc((10 + var(--digit)) * -5%));
 }
 
-[data-revealed] .digit-roll > span {
-  animation: digit-roll 1400ms cubic-bezier(0.16, 1, 0.3, 1) calc(var(--reveal-delay, 0ms) + 200ms + var(--roll-delay, 0ms)) backwards;
+[data-revealed] .digit-roll > span:not([data-still]) {
+  animation: digit-roll 1100ms cubic-bezier(0.45, 0, 0.15, 1) calc(var(--reveal-delay, 0ms) + 600ms + var(--roll-delay, 0ms)) backwards;
 }
 
 @keyframes digit-roll {
