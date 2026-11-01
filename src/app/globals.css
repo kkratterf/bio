@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 /*
- * coss.com's light theme (coss ui tokens): an off-white page, white cards with
- * a hairline border, neutral-800 text and a darkened neutral-500 for secondary
- * text (5.5:1 on white).
+ * coss.com's theme (coss ui tokens), following the visitor's system setting.
+ * Light: an off-white page (the coss sidebar, neutral-50), white panels with a
+ * hairline border, neutral-800 text and a darkened neutral-500 for secondary
+ * text (5.5:1 on white). Frame shells are a faint black tint over the page.
  */
 :root {
   --bg: #fafafa;
@@ -15,8 +16,33 @@
   --ring: #a3a3a3;
   --radius-card: 1.125rem;
   --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shell: rgb(0 0 0 / 0.035);
+  --shell-hover: rgb(0 0 0 / 0.055);
+  --panel-edge: 0 1px rgb(0 0 0 / 0.04);
 
-  color-scheme: light;
+  color-scheme: light dark;
+}
+
+/*
+ * Dark: the coss ui `.dark` tokens, resolved. The page is the dark sidebar
+ * (neutral-950 with 3% white), panels are the dark background (5% white),
+ * text is neutral-100 and secondary text a lightened neutral-500. Borders and
+ * tints flip to white, and the panel's 1px edge moves to the top, as in coss.
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111111;
+    --content: #161616;
+    --fg: #f5f5f5;
+    --muted: rgb(255 255 255 / 0.04);
+    --muted-fg: #818181;
+    --border: rgb(255 255 255 / 0.06);
+    --ring: #737373;
+    --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.25);
+    --shell: rgb(255 255 255 / 0.035);
+    --shell-hover: rgb(255 255 255 / 0.055);
+    --panel-edge: 0 -1px rgb(255 255 255 / 0.06);
+  }
 }
 
 @theme inline {
@@ -27,6 +53,8 @@
   --color-muted-fg: var(--muted-fg);
   --color-border: var(--border);
   --color-ring: var(--ring);
+  --color-shell: var(--shell);
+  --color-shell-hover: var(--shell-hover);
   --font-sans:
     var(--font-inter), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
@@ -34,6 +62,7 @@
   --font-display: var(--font-mattone), var(--font-inter), ui-sans-serif, sans-serif;
   --radius-card: var(--radius-card);
   --shadow-card: var(--card-shadow);
+  --shadow-panel-edge: var(--panel-edge);
 
   --animate-reveal: reveal 300ms ease-out both;
   --animate-status-ping: status-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;

@@ -24,8 +24,8 @@ function ArrowUpRight() {
 export function SocialCard({ social }: { social: Social }) {
   return (
     <li data-reveal>
-      <article className="group relative flex aspect-square flex-col rounded-[1.25rem] bg-black/[0.035] p-1 transition-colors hover:bg-black/[0.055]">
-        <div className="relative min-h-0 flex-1 overflow-hidden rounded-2xl border border-black/10 shadow-card">
+      <article className="group relative flex aspect-square flex-col rounded-[1.25rem] bg-shell p-1 transition-colors hover:bg-shell-hover">
+        <div className="relative min-h-0 flex-1 overflow-hidden rounded-2xl border border-border shadow-card">
           <div
             className="absolute inset-0 text-white transition-transform duration-300 ease-out group-hover:scale-[1.04]"
             style={{ background: social.background }}
