@@ -94,3 +94,17 @@ domain (set in Vercel → Project → Settings → Domains). GitHub Actions
 The previous portfolio lives at
 [portfolio.kkratter.com](https://portfolio.kkratter.com) (Vercel project
 `portfolio23`) and is linked from the Archive section.
+
+## Releases
+
+Versions follow SemVer and live in `package.json` (`version`); the changelog
+is the [GitHub Releases](https://github.com/kkratterf/bio/releases) page, with
+notes generated from PR titles and grouped by label (`.github/release.yml`).
+
+To cut a release, open a PR titled `chore(release): vX.Y.Z` that only runs
+`npm version X.Y.Z --no-git-tag-version` (it changes `package.json` and
+`package-lock.json`), label it `skip-changelog` and merge it. On `main`,
+`.github/workflows/release.yml` sees the new version, tags the merge commit
+`vX.Y.Z` and publishes the release. It builds nothing (Vercel deploys) and
+runs only on pushes that change `package.json`, so a release costs a few
+seconds of Actions time.

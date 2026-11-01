@@ -1,0 +1,25 @@
+# Groups the auto-generated release notes by PR label.
+changelog:
+  exclude:
+    labels:
+      - skip-changelog
+  categories:
+    - title: Novità
+      labels:
+        - enhancement
+    - title: Contenuti
+      labels:
+        - content
+    - title: Correzioni
+      labels:
+        - bug
+    - title: Dipendenze
+      labels:
+        - dependencies
+    - title: CI e strumenti
+      labels:
+        - ci
+        - github_actions
+    - title: Altro
+      labels:
+        - "*"

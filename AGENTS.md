@@ -10,6 +10,11 @@ Vercel at https://kkratter.com. Read `README.md` first.
   only in a `Co-Authored-By:` trailer, never as author.
 - **Work on a branch and open a PR.** Never push to `main`: it deploys to
   production. Every PR gets a Vercel preview URL; share it.
+- **Releases = merging a version bump.** A PR `chore(release): vX.Y.Z` that
+  only bumps `version` in `package.json` (and the lockfile), labelled
+  `skip-changelog`; `release.yml` tags and publishes it on `main`. No
+  `CHANGELOG.md`: the notes live in GitHub Releases. Label other PRs
+  (`enhancement`, `content`, `bug`, `ci`) so the notes are grouped.
 - **Run `npm run check` before pushing** (lint, typecheck, build). CI runs the
   same steps.
 - **Design changes need approval.** Show screenshots of the real build
@@ -24,7 +29,7 @@ Vercel at https://kkratter.com. Read `README.md` first.
 
 ## Design system
 
-- Font Inter for everything, Mattone only for the name (34px desktop, 26px
+- Font Inter for everything, Mattone only for the name (30px desktop, 24px
   mobile). Do not swap fonts: Cal Sans and PP Radio Grotesk were rejected.
 - Colours are the coss ui light tokens in `src/app/globals.css`.
 - Every card is a square `FrameCard` (double border, M63 style). About is a
