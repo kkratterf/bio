@@ -6,7 +6,7 @@
  * only after this script has set `html.reveal`: without JS, without
  * IntersectionObserver or with reduced motion everything stays visible.
  * Blocks that enter together are staggered in DOM order; the first batch
- * waits for the profile header to land.
+ * starts after the profile (photo, name, bio) has begun its own entrance.
  */
 const script = `(function(){
 var d=document.documentElement;
@@ -14,11 +14,11 @@ if(!("IntersectionObserver" in window)||matchMedia("(prefers-reduced-motion: red
 d.classList.add("reveal");
 var first=true;
 var io=new IntersectionObserver(function(entries){
-var i=0,base=first?180:0;first=false;
+var i=0,base=first?300:0;first=false;
 entries.forEach(function(e){
 if(!e.isIntersecting)return;
 var el=e.target;
-el.style.setProperty("--reveal-delay",base+Math.min(i++,6)*70+"ms");
+el.style.setProperty("--reveal-delay",base+Math.min(i++,6)*80+"ms");
 el.setAttribute("data-revealed","");
 io.unobserve(el);
 });

@@ -11,8 +11,8 @@ export default function Home() {
     <>
       <JsonLd />
       <main className="relative mx-auto flex min-h-screen w-full max-w-[1728px] flex-col items-center pb-16 xl:flex-row xl:items-start xl:p-16">
-        <header className="w-full max-w-[428px] animate-profile-in px-6 pt-12 xl:sticky xl:top-16 xl:mr-20 xl:max-w-none xl:min-w-0 xl:flex-1 xl:px-0 xl:pt-0">
-          <div className="relative size-30 shrink-0 xl:size-46">
+        <header className="w-full max-w-[428px] px-6 pt-12 xl:sticky xl:top-16 xl:mr-20 xl:max-w-none xl:min-w-0 xl:flex-1 xl:px-0 xl:pt-0">
+          <div data-intro className="relative size-30 shrink-0 xl:size-46">
             <Image
               src={profile.avatar.src}
               alt={profile.avatar.alt}
@@ -25,10 +25,10 @@ export default function Home() {
             />
           </div>
           <div className="mt-8 ml-1 w-[calc(100%-8px)] xl:ml-2 max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
-            <h1 className="font-display text-[26px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[34px]">
+            <h1 data-intro className="[--reveal-delay:90ms] font-display text-[26px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[34px]">
               {profile.name}
             </h1>
-            <p className="mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
+            <p data-intro className="[--reveal-delay:180ms] mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
               {profile.bio}
             </p>
           </div>
