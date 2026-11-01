@@ -20,7 +20,7 @@ export default function Home() {
               height={profile.avatar.height}
               sizes="(min-width: 1280px) 184px, 120px"
               priority
-              className="size-full rounded-full object-cover shadow-sm ring-1 ring-black/5"
+              className="size-full rounded-full object-cover shadow-sm ring-1 ring-border"
               draggable={false}
             />
           </div>
