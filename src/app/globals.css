@@ -36,6 +36,23 @@
   --shadow-card: var(--card-shadow);
 
   --animate-reveal: reveal 300ms ease-out both;
+  --animate-status-ping: status-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-status-pulse: status-pulse 2s ease-in-out infinite;
+
+  /* Badge dots: Live sends out a ring, Building breathes. */
+  @keyframes status-ping {
+    75%,
+    100% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes status-pulse {
+    50% {
+      opacity: 0.35;
+    }
+  }
 
   @keyframes reveal {
     from {

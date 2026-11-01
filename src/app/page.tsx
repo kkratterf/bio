@@ -25,7 +25,7 @@ export default function Home() {
             />
           </div>
           <div className="mt-8 ml-1 w-[calc(100%-8px)] xl:ml-2 max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
-            <h1 data-intro className="[--reveal-delay:90ms] font-display text-[26px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[34px]">
+            <h1 data-intro className="[--reveal-delay:90ms] font-display text-[24px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[30px]">
               {profile.name}
             </h1>
             <p data-intro className="[--reveal-delay:180ms] mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
