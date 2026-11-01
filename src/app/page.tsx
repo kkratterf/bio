@@ -13,23 +13,23 @@ export default function Home() {
       <JsonLd />
       <main className="relative mx-auto flex min-h-screen w-full max-w-[1728px] flex-col items-center pb-16 xl:flex-row xl:items-start xl:p-16">
         <header className="w-full max-w-[428px] px-6 pt-12 xl:sticky xl:top-16 xl:mr-20 xl:max-w-none xl:min-w-0 xl:flex-1 xl:px-0 xl:pt-0">
-          <div data-intro className="relative size-30 shrink-0 xl:size-46">
+          <div data-intro className="relative size-27 shrink-0 xl:size-43">
             <Image
               src={profile.avatar.src}
               alt={profile.avatar.alt}
               width={profile.avatar.width}
               height={profile.avatar.height}
-              sizes="(min-width: 1280px) 184px, 120px"
+              sizes="(min-width: 1280px) 172px, 108px"
               priority
-              className="size-full rounded-full object-cover shadow-sm ring-1 ring-black/5"
+              className="size-full rounded-full object-cover shadow-sm ring-1 ring-border"
               draggable={false}
             />
           </div>
           <div className="mt-8 ml-1 w-[calc(100%-8px)] xl:ml-2 max-w-[min(500px,100%-8px)] min-w-0 xl:max-w-[min(500px,calc(100vw-1028px))]">
-            <h1 data-intro className="[--reveal-delay:90ms] font-display text-[24px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[30px]">
+            <h1 data-intro className="[--reveal-delay:120ms] font-display text-[24px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[30px]">
               {profile.name}
             </h1>
-            <p data-intro className="[--reveal-delay:180ms] mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
+            <p data-intro className="[--reveal-delay:240ms] mt-1.5 text-lg xl:mt-2 font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
               {profile.bio}
             </p>
           </div>
@@ -80,9 +80,6 @@ export default function Home() {
         </div>
       </main>
       <VisitorCounter />
-      <footer data-reveal className="mb-10 flex w-full justify-center text-xs text-muted-fg">
-        <p>© {profile.name}</p>
-      </footer>
     </>
   );
 }

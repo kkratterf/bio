@@ -148,7 +148,7 @@ export const projectSections: ProjectSection[] = [
         domain: "play2match.it",
         status: "Building",
         description:
-          "Make new friends through sport. Mixed beach volley matches across Italy, with teams composed by level.",
+          "Building the community that matches people through sport. You show up. We take care of everything else.",
         icon: { src: "/images/icons/play2match.png", width: 180, height: 180 },
         preview: {
           src: "/images/og/play2match.jpg",
@@ -227,7 +227,7 @@ export const projectSections: ProjectSection[] = [
         domain: "fratmscript.kkratter.com",
         status: "Live",
         description:
-          "JavaScript ma comme si deve. A transpiler, written in Rust, that turns Neapolitan code into JavaScript.",
+          "JavaScript ma comme si deve. A transpiler that converts Neapolitan code to JavaScript. Written in Rust.",
         icon: "github",
         preview: {
           src: "/images/og/fratmscript.jpg",
@@ -250,7 +250,7 @@ export const projectSections: ProjectSection[] = [
         domain: "kkratter.substack.com",
         status: "Newsletter",
         description:
-          "Notes from building products: what I ship, what breaks and what I learn along the way.",
+          "Notes from building cool stuff. What I ship, what breaks and what I learn along the way.",
         icon: { src: "/images/icons/substack.jpg", width: 64, height: 64 },
         preview: {
           src: "/images/substack.jpg",
@@ -275,7 +275,7 @@ export const projectSections: ProjectSection[] = [
         domain: "portfolio.kkratter.com",
         status: "Archived",
         description:
-          "My previous portfolio, from before 2023: product and design system work, before I started shipping my own products.",
+          "My previous portfolio, from before 2023. Product and design-system work, before I started shipping.",
         icon: { src: "/images/icons/portfolio.png", width: 180, height: 180 },
         preview: {
           src: "/images/og/portfolio.jpg",

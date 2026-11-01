@@ -17,7 +17,7 @@ export async function VisitorCounter() {
   return (
     <p
       data-reveal
-      className="mx-auto mt-2 mb-8 flex w-full max-w-[428px] items-baseline gap-2 px-7 font-mono text-xs text-muted-fg xl:fixed xl:bottom-16 xl:left-[max(4.5rem,calc((100vw-1728px)/2+4.5rem))] xl:m-0 xl:w-auto xl:max-w-none xl:px-0"
+      className="mx-auto mt-2 mb-10 flex w-full max-w-[428px] items-baseline gap-2 px-7 font-mono text-xs text-muted-fg xl:fixed xl:bottom-16 xl:left-[max(4.5rem,calc((100vw-1728px)/2+4.5rem))] xl:m-0 xl:w-auto xl:max-w-none xl:px-0"
     >
       <span>{visitorCounter.label}</span>
       <span className="sr-only">{count}</span>

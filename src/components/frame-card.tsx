@@ -25,7 +25,7 @@ export function FrameCard({
 }) {
   return (
     <li data-reveal>
-      <article className="group relative flex aspect-square flex-col rounded-[1.25rem] bg-black/[0.035] p-1 transition-colors hover:bg-black/[0.055]">
+      <article className="group relative flex aspect-square flex-col rounded-[1.25rem] bg-shell p-1 transition-colors hover:bg-shell-hover">
         <header className="flex min-w-0 items-center gap-3 px-3 pt-2.5 pb-3.5">
           {icon}
           <div className="flex min-w-0 flex-1 flex-col">
@@ -47,9 +47,9 @@ export function FrameCard({
             {badge}
           </span>
         </header>
-        <div className="relative flex min-h-0 flex-1 flex-col gap-4 rounded-2xl border border-border bg-content bg-clip-padding p-4 shadow-card before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(1rem-1px)] before:shadow-[0_1px_rgb(0_0_0/0.04)] xl:p-5">
+        <div className="relative flex min-h-0 flex-1 flex-col gap-5 rounded-2xl border border-border bg-content bg-clip-padding p-4 shadow-card before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(1rem-1px)] before:shadow-panel-edge xl:gap-6 xl:p-5">
           <p className="line-clamp-3 text-sm leading-6 text-muted-fg">{description}</p>
-          <div className="relative mt-auto aspect-[1200/630] w-full shrink-0 overflow-hidden rounded-xl border border-border bg-muted">
+          <div className="relative min-h-0 w-full flex-1 overflow-hidden rounded-xl border border-border bg-muted">
             {preview}
           </div>
         </div>
