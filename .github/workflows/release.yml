@@ -1,0 +1,94 @@
+name: Release
+
+# Runs by itself when a push to main changes package.json, that is when the
+# `chore(release): vX.Y.Z` bump PR is merged: if the tag vX.Y.Z does not exist
+# yet, it tags the merge commit and publishes a GitHub Release with notes
+# grouped by PR label (.github/release.yml). A version with a suffix
+# (1.1.0-beta.1) becomes a pre-release. Pushes that change package.json but
+# leave the version alone (Dependabot, new scripts) find the tag already there
+# and publish nothing.
+#
+# Nothing is built here: Vercel already deploys main to kkratter.com. The job
+# only reads package.json and calls the GitHub API, so it takes a few seconds
+# and runs only on the pushes that touch package.json.
+#
+# By hand (workflow_dispatch): the same job for the version in package.json,
+# for example to retry a failed release. dry_run shows the notes and publishes
+# nothing.
+on:
+  push:
+    branches: [main]
+    paths:
+      - package.json
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run: show the release notes, publish nothing"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Tag and publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Read the version and look for its tag
+        id: version
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$ ]]; then
+            echo "::error::'$version' in package.json is not a SemVer version (expected X.Y.Z)"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
+          if [[ "$version" == *-* ]]; then echo "prerelease=true" >> "$GITHUB_OUTPUT"; else echo "prerelease=false" >> "$GITHUB_OUTPUT"; fi
+          if git rev-parse -q --verify "refs/tags/v$version" >/dev/null && [ "$DRY_RUN" != "true" ]; then
+            echo "release=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::v$version is already released: nothing to do"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::Releasing v$version (dry run: ${DRY_RUN:-false})"
+          fi
+
+      - name: Release notes
+        if: steps.version.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          previous=$(git tag --list 'v*' --sort=-v:refname | grep -vx "$TAG" | head -n 1 || true)
+          args=(-f tag_name="$TAG" -f target_commitish="$GITHUB_SHA")
+          if [ -n "$previous" ]; then args+=(-f previous_tag_name="$previous"); fi
+          gh api "repos/$GITHUB_REPOSITORY/releases/generate-notes" "${args[@]}" --jq .body > "$RUNNER_TEMP/notes.md"
+          cat "$RUNNER_TEMP/notes.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish the release
+        if: steps.version.outputs.release == 'true' && !inputs.dry_run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+          PRERELEASE: ${{ steps.version.outputs.prerelease }}
+        run: |
+          flags=()
+          if [ "$PRERELEASE" = "true" ]; then flags+=(--prerelease); fi
+          gh release create "$TAG" \
+            --target "$GITHUB_SHA" \
+            --title "$TAG" \
+            --notes-file "$RUNNER_TEMP/notes.md" \
+            ${flags[@]+"${flags[@]}"}
