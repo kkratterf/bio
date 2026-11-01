@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
+import { RevealScript } from "@/components/reveal-script";
 import { profile } from "@/lib/profile";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
@@ -101,7 +102,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${inter.variable} ${mattone.variable} antialiased`}>
-      <body className="min-h-screen font-sans">{children}</body>
+      <body className="min-h-screen font-sans">
+        {children}
+        <RevealScript />
+      </body>
     </html>
   );
 }
