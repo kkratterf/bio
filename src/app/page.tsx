@@ -28,7 +28,7 @@ export default function Home() {
             <h1 data-intro className="[--reveal-delay:120ms] font-display text-[24px] leading-[115%] font-normal wrap-break-word whitespace-pre-wrap text-fg xl:text-[30px]">
               {profile.name}
             </h1>
-            <p data-intro className="[--reveal-delay:240ms] mt-3 text-lg font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
+            <p data-intro className="[--reveal-delay:240ms] mt-1.5 text-lg xl:mt-2 font-normal wrap-break-word whitespace-pre-wrap text-muted-fg lg:text-[20px] lg:leading-7">
               {profile.bio}
             </p>
           </div>
