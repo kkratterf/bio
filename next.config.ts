@@ -1,5 +1,9 @@
 import type { NextConfig } from "next";
 
+// PostHog ingestion region: EU by default.
+const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com";
+const posthogAssetsHost = posthogHost.replace(".i.posthog.com", "-assets.i.posthog.com");
+
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
@@ -8,6 +12,15 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [75, 90],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+  },
+  // Required by the PostHog reverse proxy: its API paths end with a slash.
+  skipTrailingSlashRedirect: true,
+  async rewrites() {
+    return [
+      { source: "/ingest/static/:path*", destination: `${posthogAssetsHost}/static/:path*` },
+      { source: "/ingest/array/:path*", destination: `${posthogAssetsHost}/array/:path*` },
+      { source: "/ingest/:path*", destination: `${posthogHost}/:path*` },
+    ];
   },
   async headers() {
     return [
