@@ -5,6 +5,7 @@ const personId = `${siteUrl}/#person`;
 const websiteId = `${siteUrl}/#website`;
 const avatarUrl = `${siteUrl}${profile.avatar.src}`;
 const projects = projectSections.flatMap((s) => s.projects);
+const companies = projectSections.flatMap((s) => s.companies ?? []);
 
 function projectNode(project: Project) {
   const base = {
@@ -81,6 +82,15 @@ const structuredData = {
         "@type": "Occupation",
         name,
         occupationLocation: { "@type": "City", name: profile.location.locality },
+      })),
+      // Past employers. schema.org has no "worked for" history, and alumniOf
+      // accepts any Organization, so that is how they are linked.
+      alumniOf: companies.map((c) => ({
+        "@type": "Organization",
+        name: c.name,
+        url: c.website,
+        sameAs: c.href,
+        logo: `${siteUrl}${c.icon.src}`,
       })),
       knowsAbout: [...profile.knowsAbout],
       url: siteUrl,
