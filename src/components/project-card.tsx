@@ -11,26 +11,19 @@ const statusDot: Record<Project["status"], string> = {
   Archived: "bg-neutral-400",
 };
 
-// The dot's motion says whether the project is moving: Live sends out a ring
-// like an on-air light, Building breathes (coss ui's StatusDot pulse), the
-// others stay still.
-const statusMotion: Partial<Record<Project["status"], "ping" | "pulse">> = {
-  Live: "ping",
-  Building: "pulse",
-};
+// Projects that are moving (Live, Building) send out a ring like an on-air
+// light, in their own colour; the others stay still.
+const pinging: ReadonlySet<Project["status"]> = new Set(["Live", "Building"]);
 
 function StatusDot({ status }: { status: Project["status"] }) {
-  const motion = statusMotion[status];
   return (
     <span aria-hidden="true" className="relative flex size-1.5">
-      {motion === "ping" && (
+      {pinging.has(status) && (
         <span
           className={`absolute inline-flex size-full rounded-full opacity-75 motion-safe:animate-status-ping ${statusDot[status]}`}
         />
       )}
-      <span
-        className={`relative inline-flex size-1.5 rounded-full ${statusDot[status]} ${motion === "pulse" ? "motion-safe:animate-status-pulse" : ""}`}
-      />
+      <span className={`relative inline-flex size-1.5 rounded-full ${statusDot[status]}`} />
     </span>
   );
 }
