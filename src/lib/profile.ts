@@ -221,7 +221,7 @@ export const projectSections: ProjectSection[] = [
           src: "/images/og/maramao.jpg",
           width: 1200,
           height: 630,
-          alt: "Maramao: Work for 25 minutes. Then the cat takes over.",
+          alt: "The Maramao logo, a kitten mid-yawn, next to the words: Work for 25 minutes. Then the cat takes over.",
         },
       },
       {
@@ -240,7 +240,7 @@ export const projectSections: ProjectSection[] = [
           src: "/images/og/f4.jpg",
           width: 1200,
           height: 630,
-          alt: "F4: Your shortcut to every meme.",
+          alt: "The F4 logo, Stanis from Boris looking baffled, next to the words: Your shortcut to every meme.",
         },
       },
       {
