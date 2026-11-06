@@ -19,4 +19,4 @@ export const siteUrl = resolveSiteUrl();
  * Last meaningful content update, for sitemap.xml and the ProfilePage
  * dateModified. Bump it when profile.ts changes.
  */
-export const lastUpdated = "2026-11-04";
+export const lastUpdated = "2026-11-06";
