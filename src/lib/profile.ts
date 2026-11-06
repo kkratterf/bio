@@ -234,13 +234,13 @@ export const projectSections: ProjectSection[] = [
         domain: "f4.kkratter.com",
         status: "Live",
         description:
-          "Spotlight, but for your memes. Press F4, type a few letters and the meme is on your clipboard, GIFs included.",
+          "Stickers like on WhatsApp, for the whole Mac. Press fn F4, type a few letters and the sticker is on your clipboard, animated, for any chat.",
         icon: { src: "/images/icons/f4.png", width: 180, height: 180 },
         preview: {
           src: "/images/og/f4.jpg",
           width: 1200,
           height: 630,
-          alt: "The F4 logo, Stanis from Boris looking baffled, next to the words: Your shortcut to every meme.",
+          alt: "The F4 logo, Stanis from Boris looking baffled, next to the words: Your stickers in every chat.",
         },
       },
       {
