@@ -49,7 +49,8 @@ Vercel at https://kkratter.com. Read `README.md` first.
 - Absolute URLs come from `siteUrl` in `src/lib/site.ts`; never hardcode the
   domain.
 - Bump `lastUpdated` in `src/lib/site.ts` when content changes (sitemap and
-  JSON-LD `dateModified`).
+  JSON-LD `dateModified`). Keep it a full ISO 8601 datetime with offset
+  (`2026-11-06T00:00:00+01:00`); a bare date fails Google's validator.
 - The title is just the name and the meta description is the bio
   (`profile.bio`). Do not add roles to them, extra copy to the page or text to
   the OG image unless the owner asks.
