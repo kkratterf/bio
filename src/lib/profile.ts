@@ -203,7 +203,7 @@ export const projectSections: ProjectSection[] = [
   },
   {
     id: "products",
-    title: "Products",
+    title: "Cool stuff",
     projects: [
       {
         id: "maramao",
