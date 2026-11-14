@@ -269,7 +269,7 @@ export const projectSections: ProjectSection[] = [
         domain: "sunday-serif.kkratter.com",
         status: "Live",
         description:
-          "A soft serif for slow days, made for Sunday, my slow social network. Free and open source, with print effects on variable axes and a blurred version.",
+          "A soft serif for slow days. Free and open-source, with print effects on variable axes.",
         icon: { src: "/images/icons/sunday-serif.png", width: 180, height: 180 },
         preview: {
           src: "/images/og/sunday-serif.jpg",
