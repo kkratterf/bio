@@ -18,5 +18,9 @@ export const siteUrl = resolveSiteUrl();
 /**
  * Last meaningful content update, for sitemap.xml and the ProfilePage
  * dateModified. Bump it when profile.ts changes.
+ *
+ * Keep it a full ISO 8601 datetime with a timezone offset: Google's rich
+ * results validator rejects a date-only dateModified ("Invalid datetime
+ * value"). Use +01:00 in winter and +02:00 in summer (Europe/Rome).
  */
-export const lastUpdated = "2026-11-06";
+export const lastUpdated = "2026-11-06T00:00:00+01:00";
