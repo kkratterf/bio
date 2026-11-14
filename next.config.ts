@@ -47,6 +47,14 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       { source: "/secret/:slug", destination: `${legacyPortfolioUrl}/secret/:slug`, permanent: true },
+      // An even older version listed projects under /project-archive/:slug;
+      // the same slugs now live at the portfolio root.
+      { source: "/project-archive", destination: legacyPortfolioUrl, permanent: true },
+      {
+        source: "/project-archive/:slug",
+        destination: `${legacyPortfolioUrl}/:slug`,
+        permanent: true,
+      },
       { source: "/image/:path*", destination: `${legacyPortfolioUrl}/image/:path*`, permanent: true },
       { source: "/favicon/:path*", destination: `${legacyPortfolioUrl}/favicon/:path*`, permanent: true },
     ];
