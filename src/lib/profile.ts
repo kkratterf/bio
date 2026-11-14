@@ -203,7 +203,7 @@ export const projectSections: ProjectSection[] = [
   },
   {
     id: "products",
-    title: "Products",
+    title: "Cool stuff",
     projects: [
       {
         id: "maramao",
@@ -259,6 +259,23 @@ export const projectSections: ProjectSection[] = [
           width: 1200,
           height: 630,
           alt: "FratmScript: JavaScript ma comme si deve",
+        },
+      },
+      {
+        id: "sunday-serif",
+        schemaType: "WebSite",
+        href: "https://sunday-serif.kkratter.com/",
+        title: "Sunday Serif",
+        domain: "sunday-serif.kkratter.com",
+        status: "Live",
+        description:
+          "A soft serif for slow days. Free and open-source, with print effects on variable axes.",
+        icon: { src: "/images/icons/sunday-serif.png", width: 180, height: 180 },
+        preview: {
+          src: "/images/og/sunday-serif.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Sunday Serif set in the typeface, with the words: A soft serif for slow days. Free & open source.",
         },
       },
     ],
