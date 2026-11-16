@@ -23,4 +23,4 @@ export const siteUrl = resolveSiteUrl();
  * results validator rejects a date-only dateModified ("Invalid datetime
  * value"). Use +01:00 in winter and +02:00 in summer (Europe/Rome).
  */
-export const lastUpdated = "2026-11-14T00:00:00+01:00";
+export const lastUpdated = "2026-11-16T00:00:00+01:00";
